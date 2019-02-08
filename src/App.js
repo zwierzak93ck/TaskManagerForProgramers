@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Navbar } from './components/layout/Navbar';
+import { ProjectDetails } from './components/project/ProjectDetails';
+import { CreateProject } from './components/project/CreateProject';
+import { Sidebar } from './components/layout/Siedebar';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { MainContent } from './components/layout/MainContent';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        
+
+<div className="flex-container container">
+      <div className="row">
+          <div className="col-lg-12">
+          <Navbar/>
+          </div>
+          <div className="col-lg-12">
+          <MainContent/>
+          </div>
       </div>
+</div>
+
+     
     );
   }
 }

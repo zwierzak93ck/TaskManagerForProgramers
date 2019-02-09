@@ -1,5 +1,6 @@
 import React from 'react'
 
 export const ProjectDetails = (props) => {
-    return <div>{props.projectName}</div>
+    const id = props.match.params.id
+    return <div>{id}</div>
 }

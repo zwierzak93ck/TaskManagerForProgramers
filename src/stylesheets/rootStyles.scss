@@ -12,12 +12,22 @@
 }
 
 .sidebar {
-    & :first-child { 
+    & a { 
     padding: 20px 20px 0px 20px;
-    & a {
-        color: red;
+    &:hover {
+        text-decoration: none;
     }
     }
+}
+
+.button {
+text-transform: none !important;
+&:hover {
+    background-color: #efefef;
+}
+}
+.navbar-button {
+    color: #ffffff !important;
 }
 
 .create-project-container {

@@ -14,7 +14,6 @@ class App extends Component {
 <div className="flex-container container">
       <div className="row">
           <div className="col-lg-12">
-          <Navbar/>
           </div>
           <div className="col-lg-12">
           <MainContent/>

@@ -9,13 +9,14 @@ import { ProjectList } from '../project/ProjectList'
 import { SignIn } from '../auth/SignIn';
 import { SignUp } from '../auth/SignUp';
 import  { Navbar }  from './Navbar';
+import NavbarContainer from '../../containers/layout/NavbarContainer';
 
 export const MainContent = () => {
     return (
         
         <BrowserRouter>
         <div className="main-content">
-        <Navbar />
+        <NavbarContainer />
         <SidebarContainer />
         <div className="navbar-divider"/>
         <Route path="/projectList" render={(props) => <ProjectList {...props} /> } />

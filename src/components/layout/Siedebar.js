@@ -32,17 +32,8 @@ export const Sidebar = (props) => {
     open={props.open}
     onClose={props.handleToggle}
     >
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
-    <Link to="/addProject">Add Project</Link>
+    <Link to="/addProject"><Button className="button" onClick={props.handleToggle}>Add Project</Button></Link>
+    <Link to="/projectList"><Button className="button" onClick={props.handleToggle}>Project List</Button></Link>
 
     </Drawer>
     </Hidden>

@@ -19,7 +19,7 @@ export const Navbar = (props) => {
                 <Toolbar
                 >
                     <Hidden mdUp lgUp xlUp>
-                        <Button className="button navbar-button">menu</Button>
+                        <Button className="button navbar-button" onClick={props.handleToggle}>menu</Button>
                     </Hidden>
                     <Link to="/signIn"><Button className="button navbar-button">Sign In</Button></Link>
                     <Link to="/signUp"><Button className="button navbar-button">Sign Up</Button></Link>

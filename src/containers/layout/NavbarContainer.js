@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Sidebar } from '../../components/layout/Siedebar';
 import { connect } from 'react-redux';
+import  { Navbar }  from '../../components/layout/Navbar';
 
-class SidebarContainer extends Component {
-    
+class NavbarContainer extends Component {
 
     render() {
+        console.log(this.props);
         return (
-            <Sidebar open={this.props.drawerOpen} handleToggle={this.handleToggle}/>
+            <Navbar handleToggle={this.handleToggle}/>
         );
     }
 
@@ -17,9 +18,9 @@ class SidebarContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        drawerOpen: state.drawerOpen
-    }
+return {
+    drawerOpen: state.drawerOpen
+}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -28,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);

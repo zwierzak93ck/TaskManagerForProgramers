@@ -6,6 +6,7 @@ import { Sidebar } from './components/layout/Siedebar';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { MainContent } from './components/layout/MainContent';
 
+
 class App extends Component {
   render() {
     return (

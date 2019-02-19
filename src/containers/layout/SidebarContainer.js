@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {  Component } from 'react';
 import { Sidebar } from '../../components/layout/Siedebar';
 import { connect } from 'react-redux';
 

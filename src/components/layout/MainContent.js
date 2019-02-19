@@ -8,6 +8,7 @@ import SidebarContainer from '../../containers/layout/SidebarContainer';
 import { ProjectList } from '../project/ProjectList'
 import { SignIn } from '../auth/SignIn';
 import { SignUp } from '../auth/SignUp';
+import SignUpContainer from '../../containers/auth/SignUpContainer';
 import  { Navbar }  from './Navbar';
 import NavbarContainer from '../../containers/layout/NavbarContainer';
 
@@ -23,7 +24,7 @@ export const MainContent = () => {
 <Route path="/projectDetails/:id" render={(props) => <ProjectDetails {...props} />}/>
 <Route path="/addProject" render={(props) => <CreateProject {...props} />}/>
 <Route path="/signIn" render={(props) => <SignIn {...props} />}/>
-<Route path="/signUp" render={(props) => <SignUp {...props} />}/>
+<Route path="/signUp" component={SignUpContainer}/>
 </div>
 </BrowserRouter>
     )

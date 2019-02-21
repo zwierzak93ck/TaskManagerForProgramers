@@ -28,7 +28,6 @@ class SignUpContainer extends Component {
     }
 
     render() {
-        console.log(this.props.authError)
         return (
             <SignUp
             email={this.state.email}
@@ -43,7 +42,6 @@ class SignUpContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         authError: state.auth.authError
     }

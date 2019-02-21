@@ -7,11 +7,22 @@ import { signOut } from '../../store/actions/authActions';
 
 class NavbarContainer extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            anchorEl: null
+        }
+    }
     render() {
         return (
-            <Navbar handleToggle={this.handleToggle}
+            <Navbar 
+            handleToggle={this.handleToggle}
             isLoggedIn={this.props.isLoggedIn}
             signOut={this.props.signOut}
+            nickName={this.props.nickName}
+            openMenu={this.openMenu}
+            anchorEl={this.state.anchorEl}
             />
         );
     }
@@ -23,13 +34,19 @@ class NavbarContainer extends Component {
     signOut = () => {
         this.props.signOut()
     }
+
+    openMenu = (e) => {
+        this.setState({
+            anchorEl: e.currentTarget
+        })
+    }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
 return {
     drawerOpen: state.drawerOpen,
-    isLoggedIn: state.firebase.auth.isEmpty
+    isLoggedIn: state.firebase.auth.isEmpty,
+    nickName: state.firebase.profile.nickName
 }
 }
 

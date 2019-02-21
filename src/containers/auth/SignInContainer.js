@@ -14,7 +14,6 @@ class SignInContainer extends Component {
     }
 
     signIn = () => {
-        console.log('dsf');
         this.props.signIn({
             email: this.state.email,
             password: this.state.password
@@ -22,7 +21,6 @@ class SignInContainer extends Component {
     }
 
     valueChange = (e) => {
-        console.log(e)
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -36,7 +34,6 @@ class SignInContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         authError: state.auth.authError
     }

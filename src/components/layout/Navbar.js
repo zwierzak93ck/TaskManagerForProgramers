@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
+    var style = {
+        top: '80px',
+      };
     console.log(props)
     return (
             <AppBar
@@ -22,10 +25,29 @@ export const Navbar = (props) => {
                     <Hidden mdUp lgUp xlUp>
                         <Button className="button navbar-button" onClick={props.handleToggle}>menu</Button>
                     </Hidden>
+
+                    {!props.nickName ? 
                     <Link to="/signIn"><Button className="button navbar-button">Sign In</Button></Link>
-                    <Link to="/signUp"><Button className="button navbar-button">Sign Up</Button></Link>
-                    <Button className="button navbar-button" onClick={props.signOut}>Sign Out</Button>
-                    <p>{props.isLoggedIn ? null : 'true'}</p>
+                 :
+                
+                    <div>
+                            <Button
+                    onClick={props.openMenu}
+                  >
+                    {props.nickName}
+                  </Button>
+                  <Menu
+                    style={style}
+                    id="simple-menu"
+                    anchorEl={props.anchorEl}
+                    open={Boolean(props.anchorEl)}
+                    onClose={props.handleClose}
+                  >
+                    <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
+                  </Menu>
+                    </div>
+                    
+                    }
                 </Toolbar>
             </AppBar>
     )

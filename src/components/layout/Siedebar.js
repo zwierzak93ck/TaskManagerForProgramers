@@ -10,7 +10,6 @@ import withWidth from '@material-ui/core/withWidth';
 import Button from '@material-ui/core/Button';
 
 export const Sidebar = (props) => {
-    console.log(props)
     return (
         <div>
         <Hidden xsDown smDown>

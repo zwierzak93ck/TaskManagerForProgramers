@@ -8,8 +8,7 @@ export const signUp = (newUserData) => {
             newUserData.password
         )
         .then((response) => {
-            console.log(response)
-            return firestore.collection('user').doc(response.user.uid).set({
+            return firestore.collection('users').doc(response.user.uid).set({
                 nickName: newUserData.nickName
             })
         })
@@ -58,6 +57,6 @@ export const sendVerificationEmail = (userData) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
 
-        console.log(userData)
+
     }
 }

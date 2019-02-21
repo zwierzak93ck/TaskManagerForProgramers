@@ -9,6 +9,7 @@ export const SignUp = (props) => {
             <TextField value={props.password} onChange={props.valueChange} name="password"></TextField>
             <TextField value={props.nickName} onChange={props.valueChange} name="nickName"></TextField>
         <Button onClick={props.signUp}>Sign Up</Button>
+        <p>{props.authError}</p>
         </div>
     )
 }

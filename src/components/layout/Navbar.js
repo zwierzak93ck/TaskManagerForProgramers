@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
+    console.log(props)
     return (
             <AppBar
             className="toolbar"
@@ -23,7 +24,8 @@ export const Navbar = (props) => {
                     </Hidden>
                     <Link to="/signIn"><Button className="button navbar-button">Sign In</Button></Link>
                     <Link to="/signUp"><Button className="button navbar-button">Sign Up</Button></Link>
-                    <Button className="button navbar-button">Sign Out</Button>
+                    <Button className="button navbar-button" onClick={props.signOut}>Sign Out</Button>
+                    <p>{props.isLoggedIn ? null : 'true'}</p>
                 </Toolbar>
             </AppBar>
     )

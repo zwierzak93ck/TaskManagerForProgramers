@@ -8,22 +8,16 @@ export const SignIn = (props) => {
     return (
         <Card className="sign-in-flex-container">
             <CardContent className="card-content">
-                <FormControl>
-                    <TextField></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField></TextField>
-                </FormControl>
+                
+                    <TextField value={props.email} onChange={props.valueChange} name="email"></TextField>
+                
+                    <TextField value={props.password} onChange={props.valueChange} name="password"></TextField>
+                
+                
             </CardContent>
                 <CardActions>
-                    <Button>fsdfs</Button>
-                    <Button>fsdfs</Button>
+                    <Button>Sign Up</Button>
+                    <Button onClick={props.signIn}>Sign In</Button>
                 </CardActions>
         </Card>
     )

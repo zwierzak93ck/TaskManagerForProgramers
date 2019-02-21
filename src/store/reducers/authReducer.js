@@ -3,7 +3,6 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case 'SIGN_UP_SUCCESS': 
         return {
@@ -11,6 +10,36 @@ const authReducer = (state = initialState, action) => {
             authError: null
         }
         case 'SIGN_UP_ERROR':
+        return {
+            ...state,
+            authError: action.error.message
+        }
+        case 'SIGN_IN_SUCCESS':
+        return {
+            ...state,
+            authError: null
+        }
+        case 'SIGN_IN_ERROR':
+        return {
+            ...state,
+            authError: action.error.message
+        }
+        case 'SIGN_OUT_SUCCESS':
+        return {
+            ...state,
+            authError: null
+        }
+        case 'SIGN_OUT_ERROR':
+        return {
+            ...state,
+            authError: action.error.message
+        }
+        case 'VERIFY_EMAIL_SUCCESS':
+        return {
+            ...state,
+            authError: null
+        }
+        case 'VERIFY_EMAIL_ERROR':
         return {
             ...state,
             authError: action.error.message

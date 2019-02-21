@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SignUp } from '../../components/auth/SignUp';
 import {connect} from 'react-redux';
-import { signUp } from '../../store/actions/authActions';
+import { signUp, sendVerificationEmail } from '../../store/actions/authActions';
 
 class SignUpContainer extends Component {
     constructor(props) {
@@ -28,6 +28,7 @@ class SignUpContainer extends Component {
     }
 
     render() {
+        console.log(this.props.authError)
         return (
             <SignUp
             email={this.state.email}
@@ -35,8 +36,16 @@ class SignUpContainer extends Component {
             nickName={this.state.nickName}
             signUp={this.signUp}
             valueChange={this.valueChange}
+            authError={this.props.authError}
             ></SignUp>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        authError: state.auth.authError
     }
 }
 
@@ -46,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SignUpContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer)

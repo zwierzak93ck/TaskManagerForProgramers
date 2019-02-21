@@ -11,6 +11,7 @@ import { SignUp } from '../auth/SignUp';
 import SignUpContainer from '../../containers/auth/SignUpContainer';
 import  { Navbar }  from './Navbar';
 import NavbarContainer from '../../containers/layout/NavbarContainer';
+import SignInContainer from '../../containers/auth/SignInContainer';
 
 export const MainContent = () => {
     return (
@@ -23,7 +24,7 @@ export const MainContent = () => {
         <Route path="/projectList" render={(props) => <ProjectList {...props} /> } />
 <Route path="/projectDetails/:id" render={(props) => <ProjectDetails {...props} />}/>
 <Route path="/addProject" render={(props) => <CreateProject {...props} />}/>
-<Route path="/signIn" render={(props) => <SignIn {...props} />}/>
+<Route path="/signIn" component={SignInContainer}/>
 <Route path="/signUp" component={SignUpContainer}/>
 </div>
 </BrowserRouter>

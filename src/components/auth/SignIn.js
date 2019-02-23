@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export const SignIn = (props) => {
     return (
-        <Card className="sign-in-flex-container">
+        <Card className="auth-flex-container">
             <CardContent className="card-content">
                 
                     <TextField placeholder="Email" value={props.email} onChange={props.valueChange} name="email"></TextField>
@@ -15,7 +15,7 @@ export const SignIn = (props) => {
                 
                 
             </CardContent>
-                <CardActions>
+                <CardActions className="card-actions">
                 <Link to="/signUp"><Button className="button" color="primary" size="small">Sign Up</Button></Link>
                     <Button onClick={props.signIn} className="button" color="primary" variant="contained" size="medium">Sign In</Button>
                 </CardActions>

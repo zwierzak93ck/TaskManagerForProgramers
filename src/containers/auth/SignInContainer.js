@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {SignIn} from '../../components/auth/SignIn';
 import {signIn} from '../../store/actions/authActions'
+import {Redirect} from 'react-router-dom';
 
 class SignInContainer extends Component {
 

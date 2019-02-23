@@ -12,7 +12,7 @@ class App extends Component {
     return (
         
 
-<div className="flex-container container">
+<div className="container">
       <div className="row">
           <div className="col-lg-12">
           </div>

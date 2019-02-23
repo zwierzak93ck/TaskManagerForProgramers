@@ -25,6 +25,8 @@ export const signIn = (userData) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
+        
+       
 
         firebase.auth().signInWithEmailAndPassword(
             userData.email,

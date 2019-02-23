@@ -1,0 +1,15 @@
+.flex-main-content {
+    display: flex;
+    justify-content: center;
+    .auth-flex-container {
+        & .card-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .card-actions {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

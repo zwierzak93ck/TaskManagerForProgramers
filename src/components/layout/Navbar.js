@@ -12,43 +12,38 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
-    var style = {
-        top: '80px',
-      };
-    console.log(props)
-    return (
-            <AppBar
-            className="toolbar"
-            >
-                <Toolbar
-                >
-                    <Hidden mdUp lgUp xlUp>
-                        <Button className="button navbar-button" onClick={props.handleToggle}>menu</Button>
-                    </Hidden>
+  var style = {
+    top: '80px',
+  };
+  console.log(props)
+  return (
+    <AppBar className="toolbar">
+      <Toolbar>
+        <Hidden mdUp lgUp xlUp>
+          <Button className="button navbar-button" onClick={props.handleToggle}>Menu</Button>
+        </Hidden>
 
-                    {!props.nickName ? 
-                    <Link to="/signIn"><Button className="button navbar-button">Sign In</Button></Link>
-                 :
-                
-                    <div>
-                            <Button
-                    onClick={props.openMenu}
-                  >
-                    {props.nickName}
-                  </Button>
-                  <Menu
-                    style={style}
-                    id="simple-menu"
-                    anchorEl={props.anchorEl}
-                    open={Boolean(props.anchorEl)}
-                    onClose={props.handleClose}
-                  >
-                    <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
-                  </Menu>
-                    </div>
-                    
-                    }
-                </Toolbar>
-            </AppBar>
-    )
+        {
+          props.authProfile.isEmpty ?
+          <Link to="/signIn">
+            <Button className="button navbar-button">Sign In</Button>
+          </Link> :
+          <div>
+            <Button onClick={props.openMenu}>
+              {props.nickName}
+            </Button>
+            <Menu
+              style={style}
+              id="simple-menu"
+              anchorEl={props.anchorEl}
+              open={Boolean(props.anchorEl)}
+              onClose={props.handleClose}
+            >
+              <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
+            </Menu>
+          </div>
+        }
+      </Toolbar>
+    </AppBar>
+  )
 }

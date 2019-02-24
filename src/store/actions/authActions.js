@@ -8,7 +8,7 @@ export const signUp = (newUserData) => {
             newUserData.password
         )
         .then((response) => {
-            return firestore.collection('users').doc(response.user.uid).set({
+            return firestore.collection('users').doc(response.user.uid).add({
                 nickName: newUserData.nickName
             })
         })

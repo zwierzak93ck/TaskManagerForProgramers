@@ -18,7 +18,7 @@ class NavbarContainer extends Component {
         return (
             <Navbar 
             handleToggle={this.handleToggle}
-            authProfile={this.props.authProfile}
+            auth={this.props.auth}
             signOut={this.props.signOut}
             nickName={this.props.nickName}
             openMenu={this.openMenu}
@@ -45,7 +45,7 @@ class NavbarContainer extends Component {
 const mapStateToProps = (state) => {
 return {
     drawerOpen: state.drawerOpen,
-    authProfile: state.firebase.auth,
+    auth: state.firebase.auth,
     nickName: state.firebase.profile.nickName
 }
 }

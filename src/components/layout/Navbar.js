@@ -15,7 +15,6 @@ export const Navbar = (props) => {
   var style = {
     top: '80px',
   };
-  console.log(props)
   return (
     <AppBar className="toolbar">
       <Toolbar>
@@ -24,7 +23,7 @@ export const Navbar = (props) => {
         </Hidden>
 
         {
-          props.authProfile.isEmpty ?
+          props.auth.isEmpty ?
           <Link to="/signIn">
             <Button className="button navbar-button">Sign In</Button>
           </Link> :

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const ProjectList = () => {
+export const ProjectList = (props) => {
     return (
-        <div>
-        <Link to="/projectDetails/1">Project Details</Link>
-        <Link to="/projectDetails/2">Project Details</Link>
-        <Link to="/projectDetails/3">Project Details</Link>
-        <Link to="/projectDetails/4">Project Details</Link>
-        <Link to="/projectDetails/5">Project Details</Link>
+         <div>
+         { props.projects ? 
+            props.projects.map(project => (
+                <div>{project.title}</div>
+            )) : null
+        } 
         </div>
     )
 }

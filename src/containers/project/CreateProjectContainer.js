@@ -2,21 +2,60 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CreateProject } from  '../../components/project/CreateProject';
 import { Redirect } from 'react-router-dom';
+import { createProject } from '../../store/actions/projectActions';
 
 class CreateProjectContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            description: '',
+            date: null
+        }
+    }
+
+    valueChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    dateChange = (e) => {
+        this.setState({
+            date: e
+        })
+    }
+
+    createProject = () => {
+        this.props.createProject({
+            title: this.state.title,
+            description: this.state.description,
+            date: new Date()
+        })
+    }
+
     render() {
         return(
             this.props.auth.isEmpty ? 
             <Redirect to="/signIn" /> :
-            <CreateProject />
+            <CreateProject title={this.state.title} description={this.state.description} date={this.state.date} onValueChange={this.valueChange} onDateChange={this.dateChange} onProjectCreate={this.createProject}/>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         auth: state.firebase.auth
     }
 }
 
-export default connect (mapStateToProps)(CreateProjectContainer);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createProject: (project) => (dispatch(createProject(project)))
+    }
+}
+
+
+
+export default connect (mapStateToProps, mapDispatchToProps)(CreateProjectContainer);

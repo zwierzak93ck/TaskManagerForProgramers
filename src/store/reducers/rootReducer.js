@@ -2,10 +2,11 @@ import authReducer from './authReducer';
 import {combineReducers} from 'redux';
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase';
+import projectReducer from './projectReducer';
 
-const initialState = {
-    drawerOpen: false
-}
+// const initialState = {
+//     drawerOpen: false
+// }
 
 // const rootReducer = (state = initialState, action) => {
 //     console.log(action)
@@ -20,6 +21,7 @@ const initialState = {
 
 const rootReducer = combineReducers({
     auth: authReducer,
+    project: projectReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer
 });

@@ -23,6 +23,7 @@ class NavbarContainer extends Component {
             nickName={this.props.nickName}
             openMenu={this.openMenu}
             anchorEl={this.state.anchorEl}
+            closeMenu={this.closeMenu}
             />
         );
     }
@@ -32,12 +33,19 @@ class NavbarContainer extends Component {
     }
 
     signOut = () => {
-        this.props.signOut()
+        this.props.signOut();
+        
     }
 
     openMenu = (e) => {
         this.setState({
             anchorEl: e.currentTarget
+        })
+    }
+
+    closeMenu = () => {
+        this.setState({
+            anchorEl: null
         })
     }
 }

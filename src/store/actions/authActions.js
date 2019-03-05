@@ -47,6 +47,7 @@ export const signOut = () => {
 
         firebase.auth().signOut()
         .then(() => {
+            console.log('success')
             dispatch({type: 'SIGN_OUT_SUCCESS'})
         })
         .catch((error) => {

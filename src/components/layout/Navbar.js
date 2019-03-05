@@ -6,9 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Hidden } from '@material-ui/core';
-
 import { Link } from 'react-router-dom';
-
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
@@ -28,17 +26,18 @@ export const Navbar = (props) => {
             <Button className="button navbar-button">Sign In</Button>
           </Link> :
           <div>
+            {props.nickName ? 
             <Button onClick={props.openMenu}>
               {props.nickName}
-            </Button>
+            </Button> : null}
             <Menu
               style={style}
               id="simple-menu"
               anchorEl={props.anchorEl}
               open={Boolean(props.anchorEl)}
-              onClose={props.handleClose}
+              onClose={props.closeMenu}
             >
-              <MenuItem onClick={props.signOut}>Sign Out</MenuItem>
+              <Link className="link" to="/"><MenuItem onClick={props.signOut}>Sign Out</MenuItem></Link>
             </Menu>
           </div>
         }

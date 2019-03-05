@@ -10,13 +10,15 @@ class ProjectListContainer extends Component {
         return (
             this.props.auth.isEmpty ? 
             <Redirect to='/signIn' /> :
-            <ProjectList projects={this.props.projects}/>
+            this.props.projects ? 
+            this.props.projects.map(project => (
+             <ProjectList key={project.id} id={project.id} name={project.name} description={project.description} date={new Date(project.date.seconds * 1000)} />
+            )) : null
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth,
         projects: state.firestore.ordered.projects
@@ -24,6 +26,12 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
+    
     connect(mapStateToProps),
-    firestoreConnect(['projects'])
+    firestoreConnect(props => 
+        
+        [{
+        collection: 'projects',
+        where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
+    }])
 )(ProjectListContainer);

@@ -8,7 +8,7 @@ class CreateProjectContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
+            name: '',
             description: '',
             date: null
         }
@@ -21,6 +21,7 @@ class CreateProjectContainer extends Component {
     }
 
     dateChange = (e) => {
+        console.log(e)
         this.setState({
             date: e
         })
@@ -28,9 +29,9 @@ class CreateProjectContainer extends Component {
 
     createProject = () => {
         this.props.createProject({
-            title: this.state.title,
+            name: this.state.name,
             description: this.state.description,
-            date: new Date()
+            date: this.state.date
         })
     }
 
@@ -38,7 +39,7 @@ class CreateProjectContainer extends Component {
         return(
             this.props.auth.isEmpty ? 
             <Redirect to="/signIn" /> :
-            <CreateProject title={this.state.title} description={this.state.description} date={this.state.date} onValueChange={this.valueChange} onDateChange={this.dateChange} onProjectCreate={this.createProject}/>
+            <CreateProject title={this.state.projectName} description={this.state.description} date={this.state.date} onValueChange={this.valueChange} onDateChange={this.dateChange} onProjectCreate={this.createProject}/>
         )
     }
 }

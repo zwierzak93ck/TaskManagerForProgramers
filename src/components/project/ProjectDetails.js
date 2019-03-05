@@ -1,11 +1,17 @@
 import React from 'react'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { FormControl, CardActionArea, CardActions, Button } from '@material-ui/core';
 
 export const ProjectDetails = (props) => {
-    const id = props.match.params.id
+    console.log(props)
     return (
-        <div>
-            <div>Title: Title {id}</div>
-            <div>Description: Description</div>
-        </div>
+        <Card className="auth-flex-container">
+        <CardContent className="card-content">
+                <h2 className="title">{props.name}</h2>
+                <div>{props.description}</div>
+                <div>{props.date.toLocaleDateString()}</div> 
+                </CardContent>
+        </Card>
     )
 }

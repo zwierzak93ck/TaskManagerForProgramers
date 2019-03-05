@@ -29,7 +29,7 @@ class SignInContainer extends Component {
 
     render() {
         return (
-            <SignIn valueChange={this.valueChange} email={this.state.email} password={this.state.password} signIn={this.signIn} />
+            <SignIn valueChange={this.valueChange} email={this.state.email} password={this.state.password} signIn={this.signIn}/>
         )
     }
 }

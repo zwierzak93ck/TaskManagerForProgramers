@@ -16,7 +16,8 @@ import CreateProjectContainer from '../../containers/project/CreateProjectContai
 import ProjectDetailsContainer from '../../containers/project/ProjectDetailsContainer';
 import ProjectListContainer from '../../containers/project/ProjectListContainer';
 
-export const MainContent = () => {
+export const MainContent = (props) => {
+    console.log(props)
     return (
         <BrowserRouter>
             <div>
@@ -24,7 +25,9 @@ export const MainContent = () => {
                 <SidebarContainer />
                 <div className="navbar-divider" />
                 <div className="flex-main-content">
-                    <Redirect to="/projectList" />
+                    { props.auth.isEmpty ? 
+                    <Redirect to="/signIn" /> :
+                    <Redirect to="/projectList" /> }
                     <Route path="/projectList" component={ProjectListContainer} />
                     <Route path="/projectDetails/:id" component={ProjectDetailsContainer}/>
                     <Route path="/addProject" component={CreateProjectContainer}/>

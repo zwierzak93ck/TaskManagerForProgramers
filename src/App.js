@@ -4,7 +4,7 @@ import { ProjectDetails } from './components/project/ProjectDetails';
 import { CreateProject } from './components/project/CreateProject';
 import { Sidebar } from './components/layout/Siedebar';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import { MainContent } from './components/layout/MainContent';
+import  MainContentContainer  from './containers/layout/MainContentContainer';
 
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
           <div className="col-lg-12">
           </div>
           <div className="col-lg-12">
-          <MainContent/>
+          <MainContentContainer/>
           </div>
       </div>
 </div>

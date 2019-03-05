@@ -1,10 +1,23 @@
 .flex-main-content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     .auth-flex-container {
+        width: 100%;
+        margin-top: 35px;
+        border-radius: 20px;
+
         & .card-content {
             display: flex;
             flex-direction: column;
+
+            
+            & .text-field {
+                margin: 20px 0 20px 0;
+            }
+
+            & .title {
+            }
         }
 
         & .card-actions {

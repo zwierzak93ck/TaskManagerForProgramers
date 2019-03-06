@@ -21,7 +21,6 @@ class CreateProjectContainer extends Component {
     }
 
     dateChange = (e) => {
-        console.log(e)
         this.setState({
             date: e
         })
@@ -45,7 +44,6 @@ class CreateProjectContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth
     }

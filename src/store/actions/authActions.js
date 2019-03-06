@@ -8,12 +8,19 @@ export const signUp = (newUserData) => {
             newUserData.password
         )
         .then((response) => {
-            return firestore.collection('users').doc(response.user.uid).add({
+            return firestore.collection('users').doc(response.user.uid).set({
                 nickName: newUserData.nickName
             })
         })
         .then(() => {
-            dispatch({type: 'SIGN_UP_SUCCESS'});
+            const currentUser = firebase.auth().currentUser;
+            if (currentUser.emailVerified) {
+                dispatch({type: 'SIGN_IN_SUCCESS'})
+            }
+            else {
+                currentUser.sendEmailVerification();
+                dispatch(signOut())
+            }
         })
         .catch((error) => {
             dispatch({type: 'SIGN_UP_ERROR', error})
@@ -26,14 +33,18 @@ export const signIn = (userData) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         
-       
-
         firebase.auth().signInWithEmailAndPassword(
             userData.email,
             userData.password
         )
         .then(() => {
-            dispatch({type: 'SIGN_IN_SUCCESS'})
+            const currentUser = firebase.auth().currentUser;
+            if (currentUser.emailVerified) {
+                dispatch({type: 'SIGN_IN_SUCCESS'})
+            }
+            else {
+                dispatch(signOut())
+            }
         })
         .catch((error) => {
             dispatch({type: 'SIGN_IN_ERROR', error})
@@ -47,7 +58,6 @@ export const signOut = () => {
 
         firebase.auth().signOut()
         .then(() => {
-            console.log('success')
             dispatch({type: 'SIGN_OUT_SUCCESS'})
         })
         .catch((error) => {

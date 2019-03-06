@@ -8,12 +8,12 @@ import { firestoreConnect } from 'react-redux-firebase';
 class ProjectListContainer extends Component {
     render() {
         return (
-            this.props.auth.isEmpty ? 
+            this.props.auth.isEmpty  ? 
             <Redirect to='/signIn' /> :
             this.props.projects ? 
             this.props.projects.map(project => (
              <ProjectList key={project.id} id={project.id} name={project.name} description={project.description} date={new Date(project.date.seconds * 1000)} />
-            )) : null
+            )) : null 
         )
     }
 }

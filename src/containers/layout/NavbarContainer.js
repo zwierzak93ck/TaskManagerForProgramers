@@ -16,6 +16,7 @@ class NavbarContainer extends Component {
     }
     render() {
         return (
+            
             <Navbar 
             handleToggle={this.handleToggle}
             auth={this.props.auth}

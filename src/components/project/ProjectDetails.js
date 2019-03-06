@@ -4,7 +4,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { FormControl, CardActionArea, CardActions, Button } from '@material-ui/core';
 
 export const ProjectDetails = (props) => {
-    console.log(props)
     return (
         <Card className="auth-flex-container">
         <CardContent className="card-content">

@@ -22,9 +22,10 @@ export const Navbar = (props) => {
 
         {
           props.auth.isEmpty ?
+          
           <Link to="/signIn">
-            <Button className="button navbar-button">Sign In</Button>
-          </Link> :
+          <Button className="button navbar-button">Sign In</Button>
+        </Link> :
           <div>
             {props.nickName ? 
             <Button onClick={props.openMenu}>
@@ -39,7 +40,7 @@ export const Navbar = (props) => {
             >
               <Link className="link" to="/"><MenuItem onClick={props.signOut}>Sign Out</MenuItem></Link>
             </Menu>
-          </div>
+          </div> 
         }
       </Toolbar>
     </AppBar>

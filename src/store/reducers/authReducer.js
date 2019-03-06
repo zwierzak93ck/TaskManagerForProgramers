@@ -10,9 +10,10 @@ const authReducer = (state = initialState, action) => {
         return {
             ...state,
             authError: null,
-            redirect: true
+            redirect: false
         }
         case 'SIGN_UP_ERROR':
+        console.log(action.error.message)
         return {
             ...state,
             authError: action.error.message,

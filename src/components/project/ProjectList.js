@@ -6,7 +6,6 @@ import { FormControl, CardActionArea, CardActions, Button } from '@material-ui/c
 
 export const ProjectList = (props) => {
     const daysDiff = Math.round(( Date.parse(props.date) - Date.parse(new Date()) ) / 86400000)
-    console.log(props)
     return (
         <Card className="auth-flex-container">
         <CardContent className="card-content">

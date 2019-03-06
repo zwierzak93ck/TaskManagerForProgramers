@@ -4,7 +4,6 @@ import { MainContent } from '../../components/layout/MainContent'
 
 class MainContentContainer extends Component {
     render() {
-        console.log(this.props.auth.isEmpty)
         return (
             <MainContent auth={this.props.auth}/>
         )

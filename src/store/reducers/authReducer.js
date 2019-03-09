@@ -13,7 +13,6 @@ const authReducer = (state = initialState, action) => {
             redirect: false
         }
         case 'SIGN_UP_ERROR':
-        console.log(action.error.message)
         return {
             ...state,
             authError: action.error.message,
@@ -41,16 +40,16 @@ const authReducer = (state = initialState, action) => {
             ...state,
             authError: action.error.message
         }
-        case 'VERIFY_EMAIL_SUCCESS':
-        return {
-            ...state,
-            authError: null
-        }
-        case 'VERIFY_EMAIL_ERROR':
-        return {
-            ...state,
-            authError: action.error.message
-        }
+        // case 'VERIFY_EMAIL_SUCCESS':
+        // return {
+        //     ...state,
+        //     authError: null
+        // }
+        // case 'VERIFY_EMAIL_ERROR':
+        // return {
+        //     ...state,
+        //     authError: action.error.message
+        // }
         default:
         return state
     }

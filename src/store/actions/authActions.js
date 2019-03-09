@@ -1,3 +1,5 @@
+import {updateDisplayName, sendEmailVerification} from './accountActions';
+
 export const signUp = (newUserData) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
@@ -13,17 +15,19 @@ export const signUp = (newUserData) => {
             })
         })
         .then(() => {
-            const currentUser = firebase.auth().currentUser;
-            if (currentUser.emailVerified) {
-                dispatch({type: 'SIGN_IN_SUCCESS'})
-            }
-            else {
-                currentUser.sendEmailVerification();
-                dispatch(signOut())
-            }
+            dispatch(updateDisplayName(newUserData.nickName));
+        })
+        .then(() => {
+            dispatch(sendEmailVerification());
+        })
+        .then(() => {
+            dispatch(signOut());
+        })
+        .then(() => {
+            dispatch({type: 'SIGN_UP_SUCCESS'});
         })
         .catch((error) => {
-            dispatch({type: 'SIGN_UP_ERROR', error})
+            dispatch({type: 'SIGN_UP_ERROR', error});
         })
     }
 }
@@ -66,10 +70,3 @@ export const signOut = () => {
     }
 }
 
-export const sendVerificationEmail = (userData) => {
-    return (dispatch, getState, {getFirebase}) => {
-        const firebase = getFirebase();
-
-
-    }
-}

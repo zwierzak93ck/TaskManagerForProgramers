@@ -15,6 +15,7 @@ import SignInContainer from '../../containers/auth/SignInContainer';
 import CreateProjectContainer from '../../containers/project/CreateProjectContainer';
 import ProjectDetailsContainer from '../../containers/project/ProjectDetailsContainer';
 import ProjectListContainer from '../../containers/project/ProjectListContainer';
+import ForgotPaswordContainer from '../../containers/account/ForgotPaswordContainer';
 
 export const MainContent = (props) => {
     return (
@@ -32,6 +33,7 @@ export const MainContent = (props) => {
                     <Route path="/addProject" component={CreateProjectContainer}/>
                     <Route path="/signIn" component={SignInContainer} />
                     <Route path="/signUp" component={SignUpContainer} />
+                    <Route path="/forgotPassword" component={ForgotPaswordContainer} />
                 </div>
             </div>
         </BrowserRouter>

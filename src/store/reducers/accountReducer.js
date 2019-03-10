@@ -25,6 +25,16 @@ const accountReducer = (state= initialState, action) => {
             ...state,
             accountError: action.error.message
         }
+        case 'SEND_PASSWORD_RESET_EMAIL_SUCCESS':
+        return {
+            ...state,
+            accountError: null
+        }
+        case 'SEND_PASSWORD_RESET_EMAIL_ERROR': 
+        return {
+            ...state,
+            accountError: action.error.message
+        }
         default: 
         return state;
     }

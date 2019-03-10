@@ -18,6 +18,7 @@ export const SignIn = (props) => {
                 <CardActions className="card-actions">
                 <Link to="/signUp"><Button className="button" color="primary" size="medium">Sign Up</Button></Link>
                     <Button onClick={props.signIn} className="button" color="primary" variant="contained" size="large">Sign In</Button>
+                    <Link to="/forgotPassword"><Button className="button" color="primary" size="medium">Forgot Password?</Button></Link>
                 </CardActions>
         </Card>
     )

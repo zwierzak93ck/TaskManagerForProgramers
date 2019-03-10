@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {SignIn} from '../../components/auth/SignIn';
 import {signIn} from '../../store/actions/authActions'
 import {Redirect} from 'react-router-dom';
+import {sendPasswordResetEmail} from '../../store/actions/accountActions'
 
 class SignInContainer extends Component {
 
@@ -21,6 +22,12 @@ class SignInContainer extends Component {
         })
     }
 
+    sendPasswordResetEmail = (e) => {
+        this.props.sendPasswordResetEmail({
+            email: "zwierzak93ck@gmail.com"
+        })
+    }
+
     valueChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -29,7 +36,7 @@ class SignInContainer extends Component {
 
     render() {
         return (
-            <SignIn valueChange={this.valueChange} email={this.state.email} password={this.state.password} signIn={this.signIn}/>
+            <SignIn valueChange={this.valueChange} email={this.state.email} password={this.state.password} signIn={this.signIn} sendPasswordResetEmail={this.sendPasswordResetEmail}/>
         )
     }
 }

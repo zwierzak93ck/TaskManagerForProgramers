@@ -5,6 +5,7 @@ import { FormControl, TextField, CardActionArea, CardActions, Button } from '@ma
 import { Link, Redirect } from 'react-router-dom';
 
 export const SignIn = (props) => {
+    console.log(props)
     return (
         <Card className="auth-flex-container">
             <CardContent className="card-content">
@@ -20,6 +21,7 @@ export const SignIn = (props) => {
                     <Button onClick={props.signIn} className="button" color="primary" variant="contained" size="large">Sign In</Button>
                     <Link to="/forgotPassword"><Button className="button" color="primary" size="medium">Forgot Password?</Button></Link>
                 </CardActions>
+                <div>{props.emailVerified}</div>
         </Card>
     )
 }

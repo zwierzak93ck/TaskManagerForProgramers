@@ -35,7 +35,6 @@ class NavbarContainer extends Component {
 
     signOut = () => {
         this.props.signOut();
-        
     }
 
     openMenu = (e) => {
@@ -52,7 +51,6 @@ class NavbarContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
 return {
     drawerOpen: state.drawerOpen,
     auth: state.firebase.auth,

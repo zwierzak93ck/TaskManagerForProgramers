@@ -23,10 +23,9 @@ export const sendEmailVerification = () => {
         const firestore = getFirestore();
 
         const currentUser = firebase.auth().currentUser;
-        console.log(currentUser)
         var actionCodeSettings = {
-            //url: 'http://localhost:3000/signIn',
-            url: 'https://task-manager-for-programers.firebaseapp.com/signIn',
+            url: 'http://localhost:3000/signIn',
+            //url: 'https://task-manager-for-programers.firebaseapp.com/signIn',
             handleCodeInApp: true
           };
         currentUser.sendEmailVerification(actionCodeSettings)
@@ -40,7 +39,6 @@ export const sendEmailVerification = () => {
 }
 
 export const sendPasswordResetEmail = (email) => {
-    console.log(email)
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
@@ -48,8 +46,8 @@ export const sendPasswordResetEmail = (email) => {
         const auth = firebase.auth();
 
         var actionCodeSettings = {
-            //url: 'http://localhost:3000/signIn',
-            url: 'https://task-manager-for-programers.firebaseapp.com/signIn',
+            url: 'http://localhost:3000/signIn',
+            //url: 'https://task-manager-for-programers.firebaseapp.com/signIn',
             handleCodeInApp: true
           };
         auth.sendPasswordResetEmail(email.email, actionCodeSettings)
@@ -61,3 +59,4 @@ export const sendPasswordResetEmail = (email) => {
         })
     }
 }
+

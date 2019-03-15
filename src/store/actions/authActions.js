@@ -20,9 +20,9 @@ export const signUp = (newUserData) => {
         .then(() => {
             dispatch(sendEmailVerification());
         })
-        .then(() => {
-            dispatch(signOut());
-        })
+        // .then(() => {
+        //     dispatch(signOut());
+        // })
         .then(() => {
             dispatch({type: 'SIGN_UP_SUCCESS'});
         })
@@ -36,20 +36,15 @@ export const signIn = (userData) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
-        
         firebase.auth().signInWithEmailAndPassword(
             userData.email,
             userData.password
         )
         .then(() => {
-            const currentUser = firebase.auth().currentUser;
-            if (currentUser.emailVerified) {
                 dispatch({type: 'SIGN_IN_SUCCESS'})
             }
-            else {
-                dispatch(signOut())
-            }
-        })
+            
+      )
         .catch((error) => {
             dispatch({type: 'SIGN_IN_ERROR', error})
         })

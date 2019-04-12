@@ -10,6 +10,7 @@ import withWidth from '@material-ui/core/withWidth';
 import Button from '@material-ui/core/Button';
 
 export const Sidebar = (props) => {
+    const {handleToggle, open} = props;
     return (
         <div>
         <Hidden xsDown smDown>
@@ -28,11 +29,11 @@ export const Sidebar = (props) => {
     className="sidebar"
     variant="temporary"
     anchor="bottom"
-    open={props.open}
-    onClose={props.handleToggle}
+    open={open}
+    onClose={handleToggle}
     >
-    <Link to="/addProject"><Button className="button" onClick={props.handleToggle}>Add Project</Button></Link>
-    <Link to="/projectList"><Button className="button" onClick={props.handleToggle}>Project List</Button></Link>
+    <Link to="/addProject"><Button className="button" onClick={handleToggle}>Add Project</Button></Link>
+    <Link to="/projectList"><Button className="button" onClick={handleToggle}>Project List</Button></Link>
 
     </Drawer>
     </Hidden>

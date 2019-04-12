@@ -8,22 +8,23 @@ import { DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 export const CreateProject = (props) => {
+    const {name, description, onValueChange, date, onDateChange, onProjectCreate} = props;
     const currentDate = new Date();
 
     return (
-    <Card className="auth-flex-container">
+    <Card className="flex-container">
     <CardContent className="card-content">
             <h1 className="title">New Project</h1>
-            <TextField className="text-field" placeholder="Project Name" value={props.name} onChange={props.onValueChange} name="name"></TextField>
+            <TextField className="text-field" placeholder="Project Name" value={name} onChange={onValueChange} name="name"></TextField>
         
-            <TextField className="text-field" multiline={true} placeholder="Project description"  value={props.description} onChange={props.onValueChange} name="description"></TextField>
+            <TextField className="text-field" multiline={true} placeholder="Project description"  value={description} onChange={onValueChange} name="description"></TextField>
         
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker
               className="date-picker"
-              value={props.date}
+              value={date}
               format={'dd.MM.yyyy'}
-              onChange={props.onDateChange}
+              onChange={onDateChange}
               minDate={currentDate}
               ampm="false"
               disableFuture={false}
@@ -35,7 +36,7 @@ export const CreateProject = (props) => {
             
     </CardContent>
         <CardActions className="card-actions">
-            <Button onClick={props.onProjectCreate} className="button" color="primary" variant="contained" size="large">Add Project</Button>
+            <Button onClick={onProjectCreate} className="button" color="primary" variant="contained" size="large">Add Project</Button>
         </CardActions>
 </Card>
     )

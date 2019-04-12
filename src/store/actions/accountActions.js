@@ -39,6 +39,7 @@ export const sendEmailVerification = () => {
 }
 
 export const sendPasswordResetEmail = (email) => {
+    console.log(this)
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
@@ -57,6 +58,60 @@ export const sendPasswordResetEmail = (email) => {
         .catch((error) => {
             dispatch({type: 'SEND_PASSWORD_RESET_EMAIL_ERROR', error})
         })
+    }
+}
+
+export const updatePassword = (userData) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const currentUser = firebase.auth().currentUser;
+
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            currentUser.email,
+            userData.oldPassword
+        );
+
+        currentUser.reauthenticateAndRetrieveDataWithCredential(credential)
+        .then(() => {
+            currentUser.updatePassword(userData.newPassword)    
+            .then(() => {
+                dispatch({type: 'UPDATE_PASSWORD_SUCCESS'})
+            })
+            .catch((error) => {
+                dispatch({type: 'UPDATE_PASSWORD_ERROR', error})
+            })
+        })
+        .catch((error) => {
+            dispatch({type: 'REAUTHENTICATE_ERROR', error})
+        })  
+    }
+}
+
+export const updateEmail = (userData) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        const currentUser = firebase.auth().currentUser;
+
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            currentUser.email,
+            userData.password
+        );
+
+        currentUser.reauthenticateAndRetrieveDataWithCredential(credential)
+        .then(() => {
+            currentUser.updateEmail(userData.newEmail)    
+            .then(() => {
+                dispatch({type: 'UPDATE_EMAIL_SUCCESS'})
+            })
+            .catch((error) => {
+                dispatch({type: 'UPDATE_EMAIL_ERROR', error})
+            })
+        })
+        .catch((error) => {
+            dispatch({type: 'REAUTHENTICATE_ERROR', error})
+        })  
     }
 }
 

@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
+  const {auth, nickName, openMenu, handleToggle, signOut, anchorEl, closeMenu} = props;
+  console.log(auth)
   var style = {
     top: '80px',
   };
@@ -17,28 +19,29 @@ export const Navbar = (props) => {
     <AppBar className="toolbar">
       <Toolbar>
         <Hidden mdUp lgUp xlUp>
-          <Button className="button navbar-button" onClick={props.handleToggle}>Menu</Button>
+          <Button className="button navbar-button" onClick={handleToggle}>Menu</Button>
         </Hidden>
 
         {
-          props.auth.isEmpty ?
+          auth.isEmpty ?
           
           <Link to="/signIn">
           <Button className="button navbar-button">Sign In</Button>
         </Link> :
           <div>
-            {props.nickName ? 
-            <Button onClick={props.openMenu}>
-              {props.nickName}
+            {auth.displayName ? 
+            <Button onClick={openMenu}>
+              {auth.displayName}
             </Button> : null}
             <Menu
               style={style}
               id="simple-menu"
-              anchorEl={props.anchorEl}
-              open={Boolean(props.anchorEl)}
-              onClose={props.closeMenu}
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={closeMenu}
             >
-              <Link className="link" to="/"><MenuItem onClick={props.signOut}>Sign Out</MenuItem></Link>
+              <Link className="link" to="/settings"><MenuItem>Settings</MenuItem></Link>
+              <Link className="link" to="/"><MenuItem onClick={signOut}>Sign Out</MenuItem></Link>
             </Menu>
           </div> 
         }

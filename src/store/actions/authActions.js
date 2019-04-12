@@ -20,9 +20,6 @@ export const signUp = (newUserData) => {
         .then(() => {
             dispatch(sendEmailVerification());
         })
-        // .then(() => {
-        //     dispatch(signOut());
-        // })
         .then(() => {
             dispatch({type: 'SIGN_UP_SUCCESS'});
         })

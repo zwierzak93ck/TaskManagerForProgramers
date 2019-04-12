@@ -22,6 +22,7 @@ class ForgotPasswordcontainer extends Component {
     }
 
     sendPasswordResetEmail = () => {
+        console.log(this)
         this.props.sendPasswordResetEmail({
             email: this.state.email
         })

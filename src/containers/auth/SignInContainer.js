@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {SignIn} from '../../components/auth/SignIn';
-import {signIn, signOut} from '../../store/actions/authActions'
-import {Redirect} from 'react-router-dom';
-import {sendPasswordResetEmail} from '../../store/actions/accountActions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { SignIn } from '../../components/auth/SignIn';
+import { signIn } from '../../store/actions/authActions'
+import { testRegularExpression, isNotNull } from '../../services/Validation';
+import { emailRegExp, passwordRegExp } from '../../consts';
 
 class SignInContainer extends Component {
 
@@ -22,25 +22,27 @@ class SignInContainer extends Component {
         })
     }
 
-    signOut = () => {
-        this.props.signOut();
-    }
-
-    sendPasswordResetEmail = () => {
-        this.props.sendPasswordResetEmail({
-            email: "zwierzak93ck@gmail.com"
-        })
-    }
-
     valueChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    isValid = () => {
+        return isNotNull(Array.from(Object.values(this.state))) &&
+            testRegularExpression(emailRegExp, this.state.email) &&
+            testRegularExpression(passwordRegExp, this.state.password);
+    }
+
     render() {
         return (
-            <SignIn emailVerified={this.props.emailVerified} valueChange={this.valueChange} email={this.state.email} password={this.state.password} signIn={this.signIn} sendPasswordResetEmail={this.sendPasswordResetEmail}/>
+            <SignIn
+                valueChange={this.valueChange} 
+                email={this.state.email}
+                password={this.state.password} 
+                signIn={this.signIn}
+                isValid={this.isValid()}
+            />
         )
     }
 }
@@ -48,15 +50,13 @@ class SignInContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         authError: state.auth.authError,
-        accountError: state.account.accountError,
-        emailVerified: state.firebase.auth.emailVerified
+        accountError: state.account.accountError
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (userData) => (dispatch(signIn(userData))),
-        signOut: () => (dispatch(signOut()))
+        signIn: (userData) => (dispatch(signIn(userData)))
     }
 }
 

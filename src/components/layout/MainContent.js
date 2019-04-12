@@ -16,8 +16,10 @@ import CreateProjectContainer from '../../containers/project/CreateProjectContai
 import ProjectDetailsContainer from '../../containers/project/ProjectDetailsContainer';
 import ProjectListContainer from '../../containers/project/ProjectListContainer';
 import ForgotPaswordContainer from '../../containers/account/ForgotPaswordContainer';
+import SettingsContainer from '../../containers/account/SettingsContainer';
 
 export const MainContent = (props) => {
+    const {auth} = props;
     return (
         <BrowserRouter>
             <div>
@@ -25,7 +27,7 @@ export const MainContent = (props) => {
                 <SidebarContainer />
                 <div className="navbar-divider" />
                 <div className="flex-main-content">
-                    { (props.auth.isEmpty && !props.auth.emailVerified) ? 
+                    { (auth.isEmpty && !auth.emailVerified) ? 
                     <Redirect to="/signIn" /> :
                     <Redirect to="/projectList" /> }
                     <Route path="/projectList" component={ProjectListContainer} />
@@ -34,6 +36,7 @@ export const MainContent = (props) => {
                     <Route path="/signIn" component={SignInContainer} />
                     <Route path="/signUp" component={SignUpContainer} />
                     <Route path="/forgotPassword" component={ForgotPaswordContainer} />
+                    <Route path="/settings" component={SettingsContainer} />
                 </div>
             </div>
         </BrowserRouter>

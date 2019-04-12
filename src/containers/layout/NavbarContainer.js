@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import  { Navbar }  from '../../components/layout/Navbar';
 
 import { signOut } from '../../store/actions/authActions';
+import {reAuthenticateUser} from '../../store/actions/accountActions';
 
 class NavbarContainer extends Component {
 
@@ -14,6 +15,7 @@ class NavbarContainer extends Component {
             anchorEl: null
         }
     }
+
     render() {
         return (
             
@@ -21,7 +23,6 @@ class NavbarContainer extends Component {
             handleToggle={this.handleToggle}
             auth={this.props.auth}
             signOut={this.props.signOut}
-            nickName={this.props.nickName}
             openMenu={this.openMenu}
             anchorEl={this.state.anchorEl}
             closeMenu={this.closeMenu}
@@ -53,10 +54,11 @@ class NavbarContainer extends Component {
 const mapStateToProps = (state) => {
 return {
     drawerOpen: state.drawerOpen,
-    auth: state.firebase.auth,
-    nickName: state.firebase.profile.nickName
+    auth: state.firebase.auth
 }
 }
+
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

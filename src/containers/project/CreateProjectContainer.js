@@ -41,7 +41,6 @@ class CreateProjectContainer extends Component {
     }
 
     render() {
-        console.log(this.props.auth)
         return(
             this.props.auth.isEmpty ? 
             <Redirect to="/signIn" /> :

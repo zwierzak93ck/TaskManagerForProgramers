@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export const Navbar = (props) => {
-  const {auth, nickName, openMenu, handleToggle, signOut, anchorEl, closeMenu} = props;
+  const { auth, nickName, openMenu, handleToggle, signOut, anchorEl, closeMenu } = props;
   console.log(auth)
   var style = {
     top: '80px',
@@ -24,26 +24,30 @@ export const Navbar = (props) => {
 
         {
           auth.isEmpty ?
-          
-          <Link to="/signIn">
-          <Button className="button navbar-button">Sign In</Button>
-        </Link> :
-          <div>
-            {auth.displayName ? 
-            <Button onClick={openMenu}>
-              {auth.displayName}
-            </Button> : null}
-            <Menu
-              style={style}
-              id="simple-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={closeMenu}
-            >
-              <Link className="link" to="/settings"><MenuItem>Settings</MenuItem></Link>
-              <Link className="link" to="/"><MenuItem onClick={signOut}>Sign Out</MenuItem></Link>
-            </Menu>
-          </div> 
+            <Link to="/signIn">
+              <Button className="button navbar-button">Sign In</Button>
+            </Link> :
+            <div>
+              {
+                auth.displayName ?
+                  <Button onClick={openMenu}>
+                    {auth.displayName}
+                  </Button> : null
+              }
+              <Menu
+                style={style}
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={closeMenu}>
+                <Link className="link" to="/settings">
+                  <MenuItem>Settings</MenuItem>
+                </Link>
+                <Link className="link" to="/">
+                  <MenuItem onClick={signOut}>Sign Out</MenuItem>
+                </Link>
+              </Menu>
+            </div>
         }
       </Toolbar>
     </AppBar>

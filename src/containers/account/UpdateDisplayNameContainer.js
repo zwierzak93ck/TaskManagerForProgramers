@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {UpdateDisplayName} from '../../components/account/UpdateDisplayName';
-import {updateDisplayName} from '../../store/actions/accountActions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { UpdateDisplayName } from '../../components/account/UpdateDisplayName';
+import { updateDisplayName } from '../../store/actions/accountActions';
+import { isNotNull } from '../../services/Validation';
 
 class UpdateDisplayNameContainer extends Component {
 
@@ -14,10 +15,11 @@ class UpdateDisplayNameContainer extends Component {
     }
     render() {
         return (
-            <UpdateDisplayName 
+            <UpdateDisplayName
                 valueChange={this.valueChange}
                 newDisplayName={this.state.newDisplayName}
                 updateDisplayName={this.updateDisplayName}
+                isValid={this.isValid()}
             />
         )
     }
@@ -30,6 +32,10 @@ class UpdateDisplayNameContainer extends Component {
 
     updateDisplayName = () => {
         this.props.updateDisplayName(this.state.newDisplayName);
+    }
+
+    isValid = () => {
+        return isNotNull(Array.from(Object.values(this.state)));
     }
 }
 

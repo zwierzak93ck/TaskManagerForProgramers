@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {sendEmailVerification} from '../../store/actions/accountActions';
 import {SendEmailVerification} from '../../components/account/SendEmailVerification';
 
+
 class SendEmailVerificationContainer extends Component {
     render() {
         return (

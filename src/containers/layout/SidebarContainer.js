@@ -1,13 +1,14 @@
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import { Sidebar } from '../../components/layout/Siedebar';
 import { connect } from 'react-redux';
 
 class SidebarContainer extends Component {
-    
 
     render() {
         return (
-            <Sidebar open={this.props.drawerOpen} handleToggle={this.handleToggle}/>
+            <Sidebar
+                open={this.props.drawerOpen}
+                handleToggle={this.handleToggle} />
         );
     }
 
@@ -24,7 +25,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        toggleDrawer: () => { dispatch({type:'TOGGLE_DRAWER'}) }
+        toggleDrawer: () => { dispatch({ type: 'TOGGLE_DRAWER' }) }
     }
 }
 

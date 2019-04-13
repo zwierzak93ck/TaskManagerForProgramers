@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {UpdateEmail} from '../../components/account/UpdateEmail';
-import {updateEmail} from '../../store/actions/accountActions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { UpdateEmail } from '../../components/account/UpdateEmail';
+import { updateEmail } from '../../store/actions/accountActions';
+import { testRegularExpression, isNotNull, compareValues } from '../../services/Validation';
+import { emailRegExp } from '../../consts';
 
 class UpdateEmailContainer extends Component {
 
@@ -11,7 +13,7 @@ class UpdateEmailContainer extends Component {
         this.state = {
             password: '',
             newEmail: '',
-            newEmailConfirm: ''
+            confirmNewEmail: ''
         }
     }
     render() {
@@ -20,8 +22,9 @@ class UpdateEmailContainer extends Component {
                 valueChange={this.valueChange}
                 password={this.state.password}
                 newEmail={this.state.newEmail}
-                newEmailConfirm={this.state.newEmailConfirm}
+                confirmNewEmail={this.state.confirmNewEmail}
                 updateEmail={this.updateEmail}
+                isValid={this.isValid()}
             />
         )
     }
@@ -38,8 +41,14 @@ class UpdateEmailContainer extends Component {
                 newEmail: this.state.newEmail,
                 password: this.state.password
             }
-            
+
         );
+    }
+
+    isValid = () => {
+        return isNotNull(Array.from(Object.values(this.state))) &&
+            testRegularExpression(emailRegExp, this.state.newEmail) &&
+            compareValues([this.state.newEmail, this.state.confirmNewEmail]);
     }
 }
 

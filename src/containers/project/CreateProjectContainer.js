@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CreateProject } from  '../../components/project/CreateProject';
+import { CreateProject } from '../../components/project/CreateProject';
 import { Redirect } from 'react-router-dom';
 import { createProject } from '../../store/actions/projectActions';
-import { sendEmailVerification} from '../../store/actions/accountActions';
+import { sendEmailVerification } from '../../store/actions/accountActions';
 import SendEmailVerificationContainer from '../account/SendEmailVerificationContainer';
+import { isNotNull } from '../../services/Validation';
+
 
 class CreateProjectContainer extends Component {
     constructor(props) {
@@ -41,13 +43,24 @@ class CreateProjectContainer extends Component {
     }
 
     render() {
-        return(
-            this.props.auth.isEmpty ? 
-            <Redirect to="/signIn" /> :
-            this.props.auth.emailVerified ? 
-            <CreateProject title={this.state.projectName} description={this.state.description} date={this.state.date} onValueChange={this.valueChange} onDateChange={this.dateChange} onProjectCreate={this.createProject}/> 
-            : <SendEmailVerificationContainer />
+        return (
+            this.props.auth.isEmpty ?
+                <Redirect to="/signIn" /> :
+                this.props.auth.emailVerified ?
+                    <CreateProject
+                        title={this.state.projectName}
+                        description={this.state.description}
+                        date={this.state.date}
+                        onValueChange={this.valueChange}
+                        onDateChange={this.dateChange}
+                        onProjectCreate={this.createProject}
+                        isValid={this.isValid()}
+                    /> : <SendEmailVerificationContainer />
         )
+    }
+
+    isValid = () => {
+        return isNotNull(Array.from(Object.values(this.state)))
     }
 }
 
@@ -66,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect (mapStateToProps, mapDispatchToProps)(CreateProjectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProjectContainer);

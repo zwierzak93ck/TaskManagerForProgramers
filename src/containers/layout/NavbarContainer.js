@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Sidebar } from '../../components/layout/Siedebar';
 import { connect } from 'react-redux';
-import  { Navbar }  from '../../components/layout/Navbar';
-
+import { Navbar } from '../../components/layout/Navbar';
 import { signOut } from '../../store/actions/authActions';
-import {reAuthenticateUser} from '../../store/actions/accountActions';
 
 class NavbarContainer extends Component {
 
@@ -18,14 +15,13 @@ class NavbarContainer extends Component {
 
     render() {
         return (
-            
-            <Navbar 
-            handleToggle={this.handleToggle}
-            auth={this.props.auth}
-            signOut={this.props.signOut}
-            openMenu={this.openMenu}
-            anchorEl={this.state.anchorEl}
-            closeMenu={this.closeMenu}
+            <Navbar
+                handleToggle={this.handleToggle}
+                auth={this.props.auth}
+                signOut={this.props.signOut}
+                openMenu={this.openMenu}
+                anchorEl={this.state.anchorEl}
+                closeMenu={this.closeMenu}
             />
         );
     }
@@ -52,18 +48,18 @@ class NavbarContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-return {
-    drawerOpen: state.drawerOpen,
-    auth: state.firebase.auth
-}
+    return {
+        drawerOpen: state.drawerOpen,
+        auth: state.firebase.auth
+    }
 }
 
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        toggleDrawer: () => { dispatch({type:'TOGGLE_DRAWER'}) },
-        signOut: () => {dispatch(signOut())}
+        toggleDrawer: () => { dispatch({ type: 'TOGGLE_DRAWER' }) },
+        signOut: () => { dispatch(signOut()) }
     }
 }
 

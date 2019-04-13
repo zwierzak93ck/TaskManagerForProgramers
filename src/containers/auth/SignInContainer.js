@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SignIn } from '../../components/auth/SignIn';
-import { signIn } from '../../store/actions/authActions'
+import { signIn } from '../../store/actions/authActions';
 import { testRegularExpression, isNotNull } from '../../services/Validation';
 import { emailRegExp, passwordRegExp } from '../../consts';
 

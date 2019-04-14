@@ -31,11 +31,11 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-
     connect(mapStateToProps),
     firestoreConnect(props =>
-
         [{
             collection: 'projects',
             where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
-        }]))(ProjectListContainer);
+        }]
+    )
+)(ProjectListContainer);

@@ -5,8 +5,8 @@ import { FormControl, TextField, CardActionArea, CardActions, Button } from '@ma
 import { Link, Redirect } from 'react-router-dom';
 
 export const SignIn = (props) => {
-    console.log(props.isValid)
-    const { email, password, signIn, valueChange, isValid } = props;
+    const { email, password, signIn, valueChange, isValid, emailError, passwordError } = props;
+    console.log(passwordError)
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
@@ -14,20 +14,21 @@ export const SignIn = (props) => {
                 <TextField
                     className="text-field"
                     placeholder="Email"
-                    type="email"
+                    type="text"
                     value={email}
                     onChange={valueChange}
                     name="email"
-                    required
                 />
+                <div className="error">{emailError}</div>
                 <TextField
                     className="text-field"
                     placeholder="Password"
                     type="password"
                     value={password}
                     onChange={valueChange}
-                    name="password" required
+                    name="password" 
                 />
+                <div className="error">{passwordError}</div>
             </CardContent>
 
             <CardActions className="card-actions">
@@ -46,7 +47,6 @@ export const SignIn = (props) => {
                     color="primary"
                     variant="contained"
                     size="large"
-                    disabled={!isValid}
                     children="Sign In"
                 />
                 <Link to="/forgotPassword">

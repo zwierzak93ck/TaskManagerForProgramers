@@ -4,12 +4,14 @@ import { ForgotPassword } from '../../components/account/ForgotPassword'
 import { sendPasswordResetEmail } from '../../store/actions/accountActions';
 import { testRegularExpression, isNotNull } from '../../services/Validation';
 import { emailRegExp } from '../../consts';
+import {setEmailError} from '../../services/Error';
 
 class ForgotPasswordcontainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ''
+            email: '',
+            emailError: ''
         }
     }
 
@@ -19,16 +21,22 @@ class ForgotPasswordcontainer extends Component {
                 email={this.state.email}
                 valueChange={this.valueChange}
                 sendPasswordResetEmail={this.sendPasswordResetEmail}
-                isValid={this.isValid()}
+                emailError={this.state.emailError}
             />
         )
     }
 
     sendPasswordResetEmail = () => {
-        console.log(this)
-        this.props.sendPasswordResetEmail({
-            email: this.state.email
-        })
+        if(this.isValid()) {
+            this.props.sendPasswordResetEmail({
+                email: this.state.email
+            })
+        }
+        else {
+            this.setState({
+                emailError: setEmailError(emailRegExp, this.state.email)
+            })
+        }
     }
 
     valueChange = (e) => {

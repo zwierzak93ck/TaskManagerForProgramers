@@ -5,7 +5,7 @@ import { TextField, CardActions, Button } from '@material-ui/core';
 
 export const UpdateDisplayName = (props) => {
 
-    const { updateDisplayName, valueChange, newDisplayName, isValid } = props;
+    const { updateDisplayName, valueChange, newDisplayName, newDisplayNameError } = props;
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
@@ -17,6 +17,7 @@ export const UpdateDisplayName = (props) => {
                     onChange={valueChange}
                     name="newDisplayName"
                 />
+                <div className="error">{newDisplayNameError}</div>
             </CardContent>
 
             <CardActions className="card-actions">
@@ -26,7 +27,6 @@ export const UpdateDisplayName = (props) => {
                     color="primary"
                     variant="contained"
                     size="large"
-                    disabled={!isValid}
                     children="Change Display Name"
                 />
             </CardActions>

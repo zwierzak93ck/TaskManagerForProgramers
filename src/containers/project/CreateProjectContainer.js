@@ -6,6 +6,7 @@ import { createProject } from '../../store/actions/projectActions';
 import { sendEmailVerification } from '../../store/actions/accountActions';
 import SendEmailVerificationContainer from '../account/SendEmailVerificationContainer';
 import { isNotNull } from '../../services/Validation';
+import { setError } from '../../services/Error';
 
 
 class CreateProjectContainer extends Component {
@@ -14,7 +15,10 @@ class CreateProjectContainer extends Component {
         this.state = {
             name: '',
             description: '',
-            date: null
+            date: null,
+            nameError: '',
+            descriptionError: '',
+            dateError: ''
         }
     }
 
@@ -31,15 +35,21 @@ class CreateProjectContainer extends Component {
     }
 
     createProject = () => {
-        this.props.createProject({
-            name: this.state.name,
-            description: this.state.description,
-            date: this.state.date
-        });
-    }
+        if (this.isValid()) {
+            this.props.createProject({
+                name: this.state.name,
+                description: this.state.description,
+                date: this.state.date
+            });
+        }
+        else {
+            this.setState({
+                nameError: setError(!this.state.name, 'Value cannot be empty'),
+                descriptionError: setError(!this.state.description, 'Value cannot be empty'),
+                dateError: setError(!this.state.date, 'Value cannot be empty')
+            })
+        }
 
-    sendEmailVerification = () => {
-        this.props.sendEmailVerification();
     }
 
     render() {
@@ -54,7 +64,9 @@ class CreateProjectContainer extends Component {
                         onValueChange={this.valueChange}
                         onDateChange={this.dateChange}
                         onProjectCreate={this.createProject}
-                        isValid={this.isValid()}
+                        nameError={this.state.nameError}
+                        descriptionError={this.state.descriptionError}
+                        dateError={this.state.descriptionError}
                     /> : <SendEmailVerificationContainer />
         )
     }

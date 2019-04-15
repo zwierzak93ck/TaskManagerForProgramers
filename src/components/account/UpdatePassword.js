@@ -5,7 +5,7 @@ import { TextField, CardActions, Button } from '@material-ui/core';
 
 export const UpdatePassword = (props) => {
 
-    const { updatePassword, valueChange, oldPassword, newPassword, confirmNewPassword, isValid } = props;
+    const { updatePassword, valueChange, oldPassword, newPassword, confirmNewPassword, oldPasswordError, newPasswordError, confirmNewPasswordError } = props;
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
@@ -15,7 +15,9 @@ export const UpdatePassword = (props) => {
                     placeholder="Old Password"
                     value={oldPassword}
                     onChange={valueChange}
-                    name="oldPassword" />
+                    name="oldPassword" 
+                    />
+                    <div className="error">{oldPasswordError}</div>
                 <TextField
                     className="text-field"
                     placeholder="New Password"
@@ -23,6 +25,7 @@ export const UpdatePassword = (props) => {
                     onChange={valueChange}
                     name="newPassword"
                 />
+                <div className="error">{newPasswordError}</div>
                 <TextField
                     className="text-field"
                     placeholder="Email"
@@ -30,6 +33,7 @@ export const UpdatePassword = (props) => {
                     onChange={valueChange}
                     name="confirmNewPassword"
                 />
+                <div className="error">{confirmNewPasswordError}</div>
             </CardContent>
 
             <CardActions className="card-actions">
@@ -39,7 +43,6 @@ export const UpdatePassword = (props) => {
                     color="primary"
                     variant="contained"
                     size="large"
-                    disabled={!isValid}
                     children="Change password"
                 />
             </CardActions>

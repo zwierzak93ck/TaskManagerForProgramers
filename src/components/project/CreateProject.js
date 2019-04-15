@@ -8,7 +8,7 @@ import { DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 export const CreateProject = (props) => {
-  const { name, description, onValueChange, date, onDateChange, onProjectCreate, isValid } = props;
+  const { name, description, onValueChange, date, onDateChange, onProjectCreate, nameError, descriptionError, dateError } = props;
   const currentDate = new Date();
 
   return (
@@ -18,10 +18,11 @@ export const CreateProject = (props) => {
         <TextField
           className="text-field"
           placeholder="Project Name"
-          value={name} onChange={onValueChange}
+          value={name} 
+          onChange={onValueChange}
           name="name"
         />
-
+        <div className="error">{nameError}</div>
         <TextField
           className="text-field"
           multiline={true}
@@ -30,7 +31,7 @@ export const CreateProject = (props) => {
           onChange={onValueChange}
           name="description"
         />
-
+        <div className="error">{descriptionError}</div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
             className="date-picker"
@@ -45,6 +46,7 @@ export const CreateProject = (props) => {
             clearable
           />
         </MuiPickersUtilsProvider>
+        <div className="error">{dateError}</div>
       </CardContent>
 
       <CardActions className="card-actions">
@@ -54,7 +56,6 @@ export const CreateProject = (props) => {
           color="primary"
           variant="contained"
           size="large"
-          disabled={!isValid}
           children="Add Project"
         />
       </CardActions>

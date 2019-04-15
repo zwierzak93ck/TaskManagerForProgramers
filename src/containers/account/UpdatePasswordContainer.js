@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { UpdatePassword } from '../../components/account/UpdatePassword';
 import { updatePassword } from '../../store/actions/accountActions';
 import { testRegularExpression, isNotNull, compareValues } from '../../services/Validation';
-import { emailRegExp, passwordRegExp } from '../../consts';
+import { passwordRegExp } from '../../consts';
+import { setPasswordError, setError } from '../../services/Error' 
 
 class UpdatePasswordContainer extends Component {
 
@@ -13,7 +14,10 @@ class UpdatePasswordContainer extends Component {
         this.state = {
             oldPassword: '',
             newPassword: '',
-            confirmNewPassword: ''
+            confirmNewPassword: '',
+            oldPasswordError: '',
+            newPasswordError: '',
+            confirmNewPasswordError: ''
         }
     }
     render() {
@@ -23,8 +27,10 @@ class UpdatePasswordContainer extends Component {
                 oldPassword={this.state.oldPassword}
                 newPassword={this.state.newPassword}
                 newPasswordConfirm={this.state.newPasswordConfirm}
+                oldPasswordError={this.state.oldPasswordError}
+                newPasswordError={this.state.newPasswordError}
+                confirmNewPasswordError={this.state.confirmNewPasswordError}
                 updatePassword={this.updatePassword}
-                isValid={this.isValid()}
             />
         )
     }
@@ -36,13 +42,23 @@ class UpdatePasswordContainer extends Component {
     }
 
     updatePassword = () => {
-        this.props.updatePassword(
-            {
-                newPassword: this.state.newPassword,
-                oldPassword: this.state.oldPassword
-            }
-
-        );
+        if (this.isValid()) {
+            this.props.updatePassword(
+                {
+                    newPassword: this.state.newPassword,
+                    oldPassword: this.state.oldPassword
+                }
+    
+            );
+        }
+        else {
+            this.setState({
+                oldPasswordError: setError(!this.state.oldPassword, 'Value cannot be empty'), 
+                newPasswordError: setPasswordError(passwordRegExp, this.state.newPassword),
+                confirmNewPasswordError: setError(!compareValues([this.state.newPassword, this.state.confirmNewPassword]), 'The above values are not the same')
+            })
+        }
+  
     }
 
     isValid = () => {

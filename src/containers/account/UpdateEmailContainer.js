@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { UpdateEmail } from '../../components/account/UpdateEmail';
 import { updateEmail } from '../../store/actions/accountActions';
 import { testRegularExpression, isNotNull, compareValues } from '../../services/Validation';
-import { emailRegExp } from '../../consts';
+import { emailRegExp, passwordRegExp } from '../../consts';
+import {setError, setPasswordError, setEmailError} from '../../services/Error';
 
 class UpdateEmailContainer extends Component {
 
@@ -12,8 +13,11 @@ class UpdateEmailContainer extends Component {
 
         this.state = {
             password: '',
+            passwordError: '',
             newEmail: '',
-            confirmNewEmail: ''
+            newEmailError: '',
+            confirmNewEmail: '',
+            confirmNewEmailError: ''
         }
     }
     render() {
@@ -24,7 +28,9 @@ class UpdateEmailContainer extends Component {
                 newEmail={this.state.newEmail}
                 confirmNewEmail={this.state.confirmNewEmail}
                 updateEmail={this.updateEmail}
-                isValid={this.isValid()}
+                passwordError={this.state.passwordError}
+                newEmailError={this.newEmailError}
+                confirmNewEmailError={this.confirmNewEmailError}
             />
         )
     }
@@ -36,17 +42,28 @@ class UpdateEmailContainer extends Component {
     }
 
     updateEmail = () => {
-        this.props.updateEmail(
-            {
-                newEmail: this.state.newEmail,
-                password: this.state.password
-            }
+        if (this.isValid()) {
+            this.props.updateEmail(
+                {
+                    newEmail: this.state.newEmail,
+                    password: this.state.password
+                }
+    
+            );
+        } 
+        else {
+            this.setState({
+                newEmailError: setEmailError(emailRegExp, this.state.newEmail),
+                confirmNewEmailError: setError(!compareValues([this.state.newEmail, this.state.confirmNewEmail]), 'The above values are not the same'),
+                passwordError: setPasswordError(passwordRegExp, this.state.password)
+            })
+        }
 
-        );
     }
 
     isValid = () => {
         return isNotNull(Array.from(Object.values(this.state))) &&
+            testRegularExpression(passwordRegExp, this.state.password) &&
             testRegularExpression(emailRegExp, this.state.newEmail) &&
             compareValues([this.state.newEmail, this.state.confirmNewEmail]);
     }

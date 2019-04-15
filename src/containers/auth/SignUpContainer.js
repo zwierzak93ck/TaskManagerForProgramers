@@ -32,7 +32,6 @@ class SignUpContainer extends Component {
             })
         }
         else {
-            console.log(setError(!compareValues([this.state.password, this.state.confirmPassword]), 'The above Values are not the same'))
             this.setState({
                 emailError: setEmailError(emailRegExp, this.state.email),
                 confirmEmailError: setError(!compareValues([this.state.email, this.state.confirmEmail]), 'The above values are not the same'),

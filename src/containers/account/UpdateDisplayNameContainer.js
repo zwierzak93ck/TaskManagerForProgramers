@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { UpdateDisplayName } from '../../components/account/UpdateDisplayName';
 import { updateDisplayName } from '../../store/actions/accountActions';
 import { isNotNull } from '../../services/Validation';
+import {setError} from '../../services/Error';
 
 class UpdateDisplayNameContainer extends Component {
 
@@ -10,7 +11,8 @@ class UpdateDisplayNameContainer extends Component {
         super(props);
 
         this.state = {
-            newDisplayName: ''
+            newDisplayName: '',
+            newDisplayNameError: ''
         }
     }
     render() {
@@ -19,7 +21,7 @@ class UpdateDisplayNameContainer extends Component {
                 valueChange={this.valueChange}
                 newDisplayName={this.state.newDisplayName}
                 updateDisplayName={this.updateDisplayName}
-                isValid={this.isValid()}
+                newDisplayNameError={this.state.newDisplayNameError}
             />
         )
     }
@@ -31,7 +33,15 @@ class UpdateDisplayNameContainer extends Component {
     }
 
     updateDisplayName = () => {
-        this.props.updateDisplayName(this.state.newDisplayName);
+        if(this.isValid()) {
+
+            this.props.updateDisplayName(this.state.newDisplayName);
+        }
+        else {
+            this.setState({
+                newDisplayNameError: setError(!this.state.newDisplayName, 'Value cannot be empty')
+            })
+        }
     }
 
     isValid = () => {

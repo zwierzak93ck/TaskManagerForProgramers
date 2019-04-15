@@ -5,7 +5,7 @@ import { FormControl, TextField, CardActionArea, CardActions, Button } from '@ma
 import { Link, Redirect } from 'react-router-dom';
 
 export const SignIn = (props) => {
-    const { email, password, signIn, valueChange, isValid, emailError, passwordError } = props;
+    const { email, password, signIn, valueChange, emailError, passwordError } = props;
     console.log(passwordError)
     return (
         <Card className="flex-container">

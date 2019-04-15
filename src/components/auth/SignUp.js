@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Link } from 'react-router-dom';
 
 export const SignUp = (props) => {
-    const { email, confirmEmail, password, confirmPassword, nickName, signUp, valueChange, isValid } = props;
+    const { email, confirmEmail, password, confirmPassword, nickName, signUp, valueChange, emailError, confirmEmailError, passwordError, confirmPasswordError, nickNameError } = props;
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
@@ -17,6 +17,7 @@ export const SignUp = (props) => {
                     onChange={valueChange}
                     name="email"
                 />
+                <div className="error">{emailError}</div>
                 <TextField
                     className="text-field"
                     placeholder="Confirm Email"
@@ -24,6 +25,7 @@ export const SignUp = (props) => {
                     onChange={valueChange}
                     name="confirmEmail"
                 />
+                <div className="error">{confirmEmailError}</div>
                 <TextField
                     className="text-field"
                     placeholder="Password"
@@ -32,6 +34,7 @@ export const SignUp = (props) => {
                     onChange={valueChange}
                     name="password"
                 />
+                <div className="error">{passwordError}</div>
                 <TextField
                     className="text-field"
                     placeholder="Confirm Password"
@@ -40,6 +43,7 @@ export const SignUp = (props) => {
                     onChange={valueChange}
                     name="confirmPassword"
                 />
+                <div className="error">{confirmPasswordError}</div>
                 <TextField
                     className="text-field"
                     placeholder="User Name"
@@ -47,6 +51,7 @@ export const SignUp = (props) => {
                     onChange={valueChange}
                     name="nickName"
                 />
+                <div className="error">{nickNameError}</div>
             </CardContent>
 
             <CardActions className="card-actions">
@@ -64,7 +69,6 @@ export const SignUp = (props) => {
                     color="primary"
                     size="large"
                     className="button"
-                    disabled={!isValid}
                     children="Sign Up"
                 />
             </CardActions>

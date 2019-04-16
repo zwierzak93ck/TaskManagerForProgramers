@@ -1,47 +1,49 @@
-@import './_mainContentStyles';
+@import "./_mainContentStyles";
 
-.navbar-divider{
-        min-height: 75px; 
+.navbar-divider {
+  min-height: 75px;
 }
 
 .toolbar {
-    z-index: 1400 !important;
+  z-index: 1400 !important;
 
-    & :first-child {
-        display: flex;
-        flex-direction: row-reverse;
-    }
+  :first-child {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
 
 .sidebar {
-    & a { 
+  a {
     padding: 20px 20px 0px 20px;
+
     &:hover {
-        text-decoration: none;
+      text-decoration: none;
     }
-    }
+  }
 }
 
 .button {
-text-transform: none !important;
-&:hover {
+  text-transform: none !important;
+
+  &:hover {
     background-color: #efefef;
-}
+  }
 }
 .navbar-button {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .create-project-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .link {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .error {
-    color: red;
-    font-size: 13px;
+  color: red;
+  font-size: 13px;
 }

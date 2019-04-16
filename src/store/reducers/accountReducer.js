@@ -1,67 +1,77 @@
 const initialState = {
-    
     accountError: null
 }
 
-const accountReducer = (state= initialState, action) => {
-    switch(action.type) {
+const accountReducer = (state = initialState, action) => {
+    switch (action.type) {
         case 'FORGOT_PASSWORD_SUCCESS':
-        return {
-            ...state,
-            accountError: null
-        }
+            return {
+                ...state,
+                accountError: null
+            }
+
         case 'FORGOT_PASSWORD_ERROR':
-        return {
-            ...state,
-            accountError: action.error.message
-        }
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
         case 'SEND_VERIFICATION_EMAIL_SUCCESS':
-        return {
-            ...state,
-            accountError: null
-        }
+            return {
+                ...state,
+                accountError: null
+            }
+
         case 'SEND_VERIFICATION_EMAIL_ERROR':
-        return {
-            ...state,
-            accountError: action.error.message
-        }
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
         case 'SEND_PASSWORD_RESET_EMAIL_SUCCESS':
-        return {
-            ...state,
-            accountError: null
-        }
-        case 'SEND_PASSWORD_RESET_EMAIL_ERROR': 
-        return {
-            ...state,
-            accountError: action.error.message
-        }
+            return {
+                ...state,
+                accountError: null
+            }
+
+        case 'SEND_PASSWORD_RESET_EMAIL_ERROR':
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
         case 'UPDATE_PASSWORD_SUCCESS':
-        return {
-            ...state,
-            accountError: null
-        }
-        case 'UPDATE_PASSWORD_ERROR': 
-        return {
-            ...state,
-            accountError: action.error.message
-        }
+            return {
+                ...state,
+                accountError: null
+            }
+
+        case 'UPDATE_PASSWORD_ERROR':
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
         case 'UPDATE_EMAIL_SUCCESS':
-        return {
-            ...state,
-            accountError: null
-        }
+            return {
+                ...state,
+                accountError: null
+            }
+
         case 'UPDATE_EMAIL_ERROR':
-        return {
-            ...state,
-            accountError: action.error.message
-        }
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
         case 'REAUTHENTICATE_ERROR':
-        return {
-            ...state,
-            accountError: action.error.message
-        }
-        default: 
-        return state;
+            return {
+                ...state,
+                accountError: action.error.message
+            }
+
+        default:
+            return state;
     }
 }
 

@@ -1,29 +1,25 @@
 .flex-main-content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    .flex-container {
-        width: 100%;
-        margin-top: 35px;
-        border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
-        & .card-content {
-            display: flex;
-            flex-direction: column;
+  .flex-container {
+    width: 100%;
+    margin-top: 35px;
+    border-radius: 20px;
 
-            
-            & .text-field {
-                margin: 20px 0 20px 0;
-            }
+    .card-content {
+      display: flex;
+      flex-direction: column;
 
-            & .title {
-
-            }
-        }
-
-        & .card-actions {
-            display: flex;
-            justify-content: center;
-        }
+      .text-field {
+        margin: 20px 0 20px 0;
+      }
     }
+
+    .card-actions {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }

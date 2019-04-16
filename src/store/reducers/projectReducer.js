@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const projectReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'CREATE_PROJECT_SUCCESS':
             return {
                 ...state,
@@ -13,10 +13,12 @@ const projectReducer = (state = initialState, action) => {
                 description: action.description,
                 date: action.date
             }
+
         case 'CREATE_PROJECT_ERROR':
-         return state;
+            return state;
+            
         default:
-        return state;
+            return state;
     }
 }
 

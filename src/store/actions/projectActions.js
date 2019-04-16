@@ -1,5 +1,5 @@
 export const createProject = (project) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
 
         const firestore = getFirestore();
         const userId = getState().firebase.auth.uid;
@@ -8,11 +8,11 @@ export const createProject = (project) => {
             ...project,
             userId: userId
         })
-        .then(() => {
-            dispatch({type: 'CREATE_PROJECT_SUCCESS'})
-        })
-        .catch(() => {
-            dispatch({type: 'CREATE_PROJECT_ERROR'})
-        })
+            .then(() => {
+                dispatch({ type: 'CREATE_PROJECT_SUCCESS' })
+            })
+            .catch(() => {
+                dispatch({ type: 'CREATE_PROJECT_ERROR' })
+            })
     }
 }

@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { MainContent } from '../../components/layout/MainContent'
 
 class MainContentContainer extends Component {
+
     render() {
         return (
-            <MainContent auth={this.props.auth}/>
+            <MainContent auth={this.props.auth} />
         )
     }
 }

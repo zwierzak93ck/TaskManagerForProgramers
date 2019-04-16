@@ -3,22 +3,25 @@ import { SignUp } from '../../components/auth/SignUp';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 import { testRegularExpression, isNotNull, compareValues } from '../../services/Validation';
+import { setEmailError, setPasswordError, setError } from '../../services/Error'
 import { emailRegExp, passwordRegExp } from '../../consts';
-import {setEmailError, setPasswordError, setError} from '../../services/Error'
 
 class SignUpContainer extends Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
             email: '',
-            emailError: '',
             confirmEmail: '',
-            confirmEmailError: '',
             password: '',
-            passwordError: '',
             confirmPassword: '',
-            confirmPasswordError: '',
             nickName: '',
+
+            emailError: '',
+            confirmEmailError: '',
+            passwordError: '',
+            confirmPasswordError: '',
             nickNameError: ''
         }
     }
@@ -29,20 +32,24 @@ class SignUpContainer extends Component {
                 email: this.state.email,
                 password: this.state.password,
                 nickName: this.state.nickName
-            })
+            });
         }
         else {
-            this.setState({
-                emailError: setEmailError(emailRegExp, this.state.email),
-                confirmEmailError: setError(!compareValues([this.state.email, this.state.confirmEmail]), 'The above values are not the same'),
-                passwordError: setPasswordError(passwordRegExp, this.state.password),
-                confirmPasswordError: setError(!compareValues([this.state.password, this.state.confirmPassword]), 'The above values are not the same'),
-                nickNameError: setError(!this.state.nickName, 'Value cannot be empty')
-            })
+            this.setErrors();
         }
     }
 
-    valueChange = (e) => {
+    setErrors = () => {
+        this.setState({
+            emailError: setEmailError(emailRegExp, this.state.email),
+            confirmEmailError: setError(!compareValues([this.state.email, this.state.confirmEmail]), 'The above values are not the same'),
+            passwordError: setPasswordError(passwordRegExp, this.state.password),
+            confirmPasswordError: setError(!compareValues([this.state.password, this.state.confirmPassword]), 'The above values are not the same'),
+            nickNameError: setError(!this.state.nickName, 'Value cannot be empty')
+        });
+    }
+
+    onValueChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -56,8 +63,6 @@ class SignUpContainer extends Component {
             compareValues([this.state.password, this.state.confirmPassword]);
     }
 
-
-
     render() {
         return (
             <SignUp
@@ -66,15 +71,16 @@ class SignUpContainer extends Component {
                 password={this.state.password}
                 confirmPassword={this.state.confirmPassword}
                 nickName={this.state.nickName}
+
                 emailError={this.state.emailError}
                 confirmEmailError={this.state.confirmEmailError}
                 passwordError={this.state.passwordError}
                 confirmPasswordError={this.state.confirmPasswordError}
                 nickNameError={this.state.nickNameError}
-                signUp={this.signUp}
-                valueChange={this.valueChange}
                 authError={this.props.authError}
-                isValid={this.isValid()}
+
+                signUp={this.signUp}
+                onValueChange={this.onValueChange}
             />
         )
     }

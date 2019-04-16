@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { UpdateEmail } from '../../components/account/UpdateEmail';
 import { updateEmail } from '../../store/actions/accountActions';
 import { testRegularExpression, isNotNull, compareValues } from '../../services/Validation';
+import { setError, setPasswordError, setEmailError } from '../../services/Error';
 import { emailRegExp, passwordRegExp } from '../../consts';
-import {setError, setPasswordError, setEmailError} from '../../services/Error';
 
 class UpdateEmailContainer extends Component {
 
@@ -15,50 +15,40 @@ class UpdateEmailContainer extends Component {
             password: '',
             passwordError: '',
             newEmail: '',
+
             newEmailError: '',
             confirmNewEmail: '',
             confirmNewEmailError: ''
         }
     }
-    render() {
-        return (
-            <UpdateEmail
-                valueChange={this.valueChange}
-                password={this.state.password}
-                newEmail={this.state.newEmail}
-                confirmNewEmail={this.state.confirmNewEmail}
-                updateEmail={this.updateEmail}
-                passwordError={this.state.passwordError}
-                newEmailError={this.newEmailError}
-                confirmNewEmailError={this.confirmNewEmailError}
-            />
-        )
-    }
-
-    valueChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
 
     updateEmail = () => {
         if (this.isValid()) {
-            this.props.updateEmail(
-                {
-                    newEmail: this.state.newEmail,
-                    password: this.state.password
-                }
-    
+            this.props.updateEmail({
+                newEmail: this.state.newEmail,
+                password: this.state.password
+            }
+
             );
-        } 
+        }
         else {
-            this.setState({
-                newEmailError: setEmailError(emailRegExp, this.state.newEmail),
-                confirmNewEmailError: setError(!compareValues([this.state.newEmail, this.state.confirmNewEmail]), 'The above values are not the same'),
-                passwordError: setPasswordError(passwordRegExp, this.state.password)
-            })
+            this.setErrors();
         }
 
+    }
+
+    setErrors = () => {
+        this.setState({
+            newEmailError: setEmailError(emailRegExp, this.state.newEmail),
+            confirmNewEmailError: setError(!compareValues([this.state.newEmail, this.state.confirmNewEmail]), 'The above values are not the same'),
+            passwordError: setPasswordError(passwordRegExp, this.state.password)
+        });
+    }
+
+    onValueChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     isValid = () => {
@@ -66,6 +56,23 @@ class UpdateEmailContainer extends Component {
             testRegularExpression(passwordRegExp, this.state.password) &&
             testRegularExpression(emailRegExp, this.state.newEmail) &&
             compareValues([this.state.newEmail, this.state.confirmNewEmail]);
+    }
+
+    render() {
+        return (
+            <UpdateEmail
+                password={this.state.password}
+                newEmail={this.state.newEmail}
+                confirmNewEmail={this.state.confirmNewEmail}
+
+                passwordError={this.state.passwordError}
+                newEmailError={this.newEmailError}
+                confirmNewEmailError={this.confirmNewEmailError}
+
+                updateEmail={this.updateEmail}
+                onValueChange={this.onValueChange}
+            />
+        )
     }
 }
 

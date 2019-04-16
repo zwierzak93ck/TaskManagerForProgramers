@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ProjectList } from '../../components/project/ProjectList';
-import { Redirect } from 'react-router-dom';
-import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
+import { ProjectList } from '../../components/project/ProjectList';
 
 class ProjectListContainer extends Component {
+
     render() {
         return (
             this.props.auth.isEmpty ?
@@ -32,10 +33,9 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect(props =>
-        [{
-            collection: 'projects',
-            where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
-        }]
+    firestoreConnect(props => [{
+        collection: 'projects',
+        where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
+    }]
     )
 )(ProjectListContainer);

@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 
 class SidebarContainer extends Component {
 
+    handleToggle = () => {
+        this.props.toggleDrawer();
+    }
+
     render() {
         return (
             <Sidebar
                 open={this.props.drawerOpen}
-                handleToggle={this.handleToggle} />
+                handleToggle={this.handleToggle}
+            />
         );
-    }
-
-    handleToggle = () => {
-        this.props.toggleDrawer();
     }
 }
 

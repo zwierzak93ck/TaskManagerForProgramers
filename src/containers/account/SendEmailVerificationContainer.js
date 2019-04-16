@@ -1,20 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {sendEmailVerification} from '../../store/actions/accountActions';
-import {SendEmailVerification} from '../../components/account/SendEmailVerification';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { SendEmailVerification } from '../../components/account/SendEmailVerification';
+import { sendEmailVerification } from '../../store/actions/accountActions';
 
 
 class SendEmailVerificationContainer extends Component {
-    render() {
-        return (
-            <SendEmailVerification 
-                sendEmailVerification={this.sendEmailVerification}
-            />
-        )
-    }
 
     sendEmailVerification = () => {
         this.props.sendEmailVerification();
+    }
+
+    render() {
+        return (
+            <SendEmailVerification
+                sendEmailVerification={this.sendEmailVerification}
+            />
+        )
     }
 }
 
@@ -26,7 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        sendEmailVerification: () => {dispatch(sendEmailVerification())}
+        sendEmailVerification: () => { dispatch(sendEmailVerification()) }
     }
 
 }

@@ -13,38 +13,33 @@ class NavbarContainer extends Component {
         }
     }
 
-    render() {
-        return (
-            <Navbar
-                handleToggle={this.handleToggle}
-                auth={this.props.auth}
-                signOut={this.props.signOut}
-                openMenu={this.openMenu}
-                anchorEl={this.state.anchorEl}
-                closeMenu={this.closeMenu}
-            />
-        );
+    signOut = () => {
+        this.props.signOut();
     }
 
     handleToggle = () => {
         this.props.toggleDrawer();
     }
 
-    signOut = () => {
-        this.props.signOut();
-    }
-
-    openMenu = (e) => {
+    onMenuToggle = (e) => {
         this.setState({
-            anchorEl: e.currentTarget
+            anchorEl: e.currentTarget ? null : e.currentTarget
         })
     }
 
-    closeMenu = () => {
-        this.setState({
-            anchorEl: null
-        })
+    render() {
+        return (
+            <Navbar
+                handleToggle={this.handleToggle}
+                auth={this.props.auth}
+                signOut={this.props.signOut}
+                onMenuToggle={this.onMenuToggle}
+                anchorEl={this.state.anchorEl}
+                closeMenu={this.closeMenu}
+            />
+        );
     }
+
 }
 
 const mapStateToProps = (state) => {

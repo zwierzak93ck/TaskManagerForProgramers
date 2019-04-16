@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ProjectDetails } from '../../components/project/ProjectDetails';
-import { Redirect } from 'react-router-dom';
-import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
+import { ProjectDetails } from '../../components/project/ProjectDetails';
 
 class ProjectDetailsContainer extends Component {
+
     render() {
         const id = this.props.match.params.id;
         return (
@@ -33,8 +34,9 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect(props =>
-        [{
-            collection: 'projects',
-            where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
-        }]))(ProjectDetailsContainer);
+    firestoreConnect(props => [{
+        collection: 'projects',
+        where: [['userId', '==', props.auth.uid ? props.auth.uid : null]]
+    }]
+    )
+)(ProjectDetailsContainer);

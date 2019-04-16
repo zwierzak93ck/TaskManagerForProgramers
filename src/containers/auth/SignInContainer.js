@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { SignIn } from '../../components/auth/SignIn';
 import { signIn } from '../../store/actions/authActions';
 import { testRegularExpression, isNotNull } from '../../services/Validation';
+import { setEmailError, setPasswordError } from '../../services/Error';
 import { emailRegExp, passwordRegExp } from '../../consts';
-import {setEmailError, setPasswordError} from '../../services/Error';
 
 class SignInContainer extends Component {
 
@@ -13,31 +13,32 @@ class SignInContainer extends Component {
         this.state = {
             email: '',
             password: '',
+
             emailError: '',
             passwordError: ''
         }
     }
 
     signIn = () => {
-        switch (this.isValid()) {
-            case true:
-                this.props.signIn({
-                    email: this.state.email,
-                    password: this.state.password
-                })
-                break;
-            case false:
-                this.setState({
-                    emailError: setEmailError(emailRegExp, this.state.email),
-                   passwordError: setPasswordError(passwordRegExp, this.state.password)
-                })
-                break;
-            default:
-                break;
+        if (this.isValid()) {
+            this.props.signIn({
+                email: this.state.email,
+                password: this.state.password
+            });
+        }
+        else {
+            this.setErrors();
         }
     }
 
-    valueChange = (e) => {
+    setErrors = () => {
+        this.setState({
+            emailError: setEmailError(emailRegExp, this.state.email),
+            passwordError: setPasswordError(passwordRegExp, this.state.password)
+        });
+    }
+
+    onValueChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -52,12 +53,16 @@ class SignInContainer extends Component {
     render() {
         return (
             <SignIn
-                valueChange={this.valueChange}
                 email={this.state.email}
-                emailError={this.state.emailError}
                 password={this.state.password}
+
+                emailError={this.state.emailError}
                 passwordError={this.state.passwordError}
+                authError={this.props.authError}
+                accountError={this.props.accountError}
+
                 signIn={this.signIn}
+                onValueChange={this.onValueChange}
             />
         )
     }

@@ -79,7 +79,7 @@ class SignUpContainer extends Component {
                 nickNameError={this.state.nickNameError}
                 authError={this.props.authError}
 
-                signUp={this.signUp}
+                onSignUp={this.signUp}
                 onValueChange={this.onValueChange}
             />
         )

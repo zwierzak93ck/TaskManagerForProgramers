@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
 
 export const Sidebar = (props) => {
     const { handleToggle, open } = props;
@@ -12,10 +12,18 @@ export const Sidebar = (props) => {
                 <Drawer className="sidebar" variant="permanent">
                     <div className="navbar-divider" />
                     <Link to="/addProject">
-                        <Button className="button" variant="outlined">Add Project</Button>
+                        <Button
+                            className="button"
+                            variant="outlined"
+                            children="Add Project"
+                        />
                     </Link>
                     <Link to="/projectList">
-                        <Button className="button" variant="outlined">Project List</Button>
+                        <Button
+                            className="button"
+                            variant="outlined"
+                            children="Project List"
+                        />
                     </Link>
                 </Drawer>
             </Hidden>
@@ -26,14 +34,24 @@ export const Sidebar = (props) => {
                     variant="temporary"
                     anchor="bottom"
                     open={open}
-                    onClose={handleToggle}
-                >
+                    onClose={handleToggle}>
+
                     <Link to="/addProject">
-                        <Button className="button" onClick={handleToggle}>Add Project</Button>
+                        <Button
+                            className="button"
+                            onClick={handleToggle}
+                            children="Add Project"
+                        />
                     </Link>
+
                     <Link to="/projectList">
-                        <Button className="button" onClick={handleToggle}>Project List</Button>
+                        <Button
+                            className="button"
+                            onClick={handleToggle}
+                            children="Project list"
+                        />
                     </Link>
+                    
                 </Drawer>
             </Hidden>
         </div>

@@ -61,7 +61,7 @@ class SignInContainer extends Component {
                 authError={this.props.authError}
                 accountError={this.props.accountError}
 
-                signIn={this.signIn}
+                onSignIn={this.signIn}
                 onValueChange={this.onValueChange}
             />
         )

@@ -21,7 +21,7 @@ class NavbarContainer extends Component {
         this.props.toggleDrawer();
     }
 
-    onMenuToggle = (e) => {
+    toggleMenu = (e) => {
         this.setState({
             anchorEl: e.currentTarget ? null : e.currentTarget
         })
@@ -32,10 +32,9 @@ class NavbarContainer extends Component {
             <Navbar
                 handleToggle={this.handleToggle}
                 auth={this.props.auth}
-                signOut={this.props.signOut}
-                onMenuToggle={this.onMenuToggle}
+                onSignOut={this.props.signOut}
+                onMenuToggle={this.toggleMenu}
                 anchorEl={this.state.anchorEl}
-                closeMenu={this.closeMenu}
             />
         );
     }

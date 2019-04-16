@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { FormControl, CardActionArea, CardActions, Button } from '@material-ui/core';
+import { CardActions, Button } from '@material-ui/core';
 
 export const ProjectList = (props) => {
     const { date, name, description, id } = props;
-    const daysDiff = Math.round((Date.parse(date) - Date.parse(new Date())) / 86400000)
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
@@ -27,6 +26,5 @@ export const ProjectList = (props) => {
                 </Link>
             </CardActions>
         </Card>
-
     )
 }

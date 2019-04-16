@@ -1,11 +1,20 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { FormControl, TextField, CardActionArea, CardActions, Button } from '@material-ui/core';
-import { Link, Redirect } from 'react-router-dom';
+import { TextField, CardActions, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export const SignIn = (props) => {
-    const { email, password, signIn, valueChange, emailError, passwordError } = props;
+    const {
+        email,
+        password,
+
+        emailError,
+        passwordError,
+
+        onSignIn,
+        onValueChange
+    } = props;
     console.log(passwordError)
     return (
         <Card className="flex-container">
@@ -16,7 +25,7 @@ export const SignIn = (props) => {
                     placeholder="Email"
                     type="text"
                     value={email}
-                    onChange={valueChange}
+                    onChange={onValueChange}
                     name="email"
                 />
                 <div className="error">{emailError}</div>
@@ -25,8 +34,8 @@ export const SignIn = (props) => {
                     placeholder="Password"
                     type="password"
                     value={password}
-                    onChange={valueChange}
-                    name="password" 
+                    onChange={onValueChange}
+                    name="password"
                 />
                 <div className="error">{passwordError}</div>
             </CardContent>
@@ -42,7 +51,7 @@ export const SignIn = (props) => {
                 </Link>
                 <Button
                     type="submit"
-                    onClick={signIn}
+                    onClick={onSignIn}
                     className="button"
                     color="primary"
                     variant="contained"

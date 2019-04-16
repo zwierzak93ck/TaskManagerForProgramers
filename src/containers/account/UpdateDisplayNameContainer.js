@@ -49,7 +49,7 @@ class UpdateDisplayNameContainer extends Component {
 
                 newDisplayNameError={this.state.newDisplayNameError}
 
-                updateDisplayName={this.updateDisplayName}
+                onDisplayNameUpdate={this.updateDisplayName}
                 onValueChange={this.onValueChange}
             />
         )

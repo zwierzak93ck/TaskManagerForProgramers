@@ -4,16 +4,24 @@ import CardContent from '@material-ui/core/CardContent';
 import { TextField, CardActions, Button } from '@material-ui/core';
 
 export const ForgotPassword = (props) => {
-    const { email, valueChange, sendPasswordResetEmail, emailError } = props
+    const {
+        email,
+
+        emailError,
+
+        sendPasswordResetEmail,
+        onValueChange
+    } = props
     return (
         <Card className="flex-container">
             <CardContent className="card-content">
                 <h1 className="title">Sign In</h1>
+                
                 <TextField
                     className="text-field"
                     placeholder="Email"
                     value={email}
-                    onChange={valueChange}
+                    onChange={onValueChange}
                     name="email"
                 />
                 <div className="error">{emailError}</div>

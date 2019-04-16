@@ -69,7 +69,7 @@ class UpdatePasswordContainer extends Component {
                 newPasswordError={this.state.newPasswordError}
                 confirmNewPasswordError={this.state.confirmNewPasswordError}
 
-                updatePassword={this.updatePassword}
+                onPasswordUpdate={this.updatePassword}
                 onValueChange={this.onValueChange}
             />
         )

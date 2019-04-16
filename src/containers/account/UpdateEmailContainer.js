@@ -69,7 +69,7 @@ class UpdateEmailContainer extends Component {
                 newEmailError={this.newEmailError}
                 confirmNewEmailError={this.confirmNewEmailError}
 
-                updateEmail={this.updateEmail}
+                onEmailUpdate={this.updateEmail}
                 onValueChange={this.onValueChange}
             />
         )

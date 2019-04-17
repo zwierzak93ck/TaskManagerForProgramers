@@ -8,6 +8,7 @@ export const isNotNull = (values) => {
 
 export const compareValues = (values) => {
     return values.every(element => {
+        console.log(element)
         return element === values[0];
     })
 }

@@ -12,24 +12,27 @@ class UpdateEmailContainer extends Component {
         super(props);
 
         this.state = {
-            password: '',
-            passwordError: '',
-            newEmail: '',
+            properties: {
+                password: '',
+                passwordError: '',
+                newEmail: ''
+            },
 
-            newEmailError: '',
-            confirmNewEmail: '',
-            confirmNewEmailError: ''
+            errors: {
+                newEmailError: '',
+                confirmNewEmail: '',
+                confirmNewEmailError: ''
+            }
         }
     }
 
     updateEmail = () => {
-        if (this.isValid) {
+        const { properties } = this.state
+        if (this.isValid()) {
             this.props.updateEmail({
-                newEmail: this.state.newEmail,
-                password: this.state.password
-            }
-
-            );
+                newEmail: properties.newEmail,
+                password: properties.password
+            });
         }
         else {
             this.setErrors();
@@ -38,36 +41,46 @@ class UpdateEmailContainer extends Component {
     }
 
     setErrors = () => {
+        const { properties, errors } = this.state;
         this.setState({
-            newEmailError: setEmailError(emailRegExp, this.state.newEmail),
-            confirmNewEmailError: setError(!compareValues([this.state.newEmail, this.state.confirmNewEmail]), 'The above values are not the same'),
-            passwordError: setPasswordError(passwordRegExp, this.state.password)
+            errors: {
+                ...errors,
+                newEmailError: setEmailError(emailRegExp, properties.newEmail),
+                confirmNewEmailError: setError(!compareValues([properties.newEmail, properties.confirmNewEmail]), 'The above values are not the same'),
+                passwordError: setPasswordError(passwordRegExp, properties.password)
+            }
         });
     }
 
     changeValue = (e) => {
+        const { properties } = this.state;
         this.setState({
-            [e.target.name]: e.target.value
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state))) &&
-            testRegularExpression(passwordRegExp, this.state.password) &&
-            testRegularExpression(emailRegExp, this.state.newEmail) &&
-            compareValues([this.state.newEmail, this.state.confirmNewEmail]);
+        const { properties } = this.state;
+        return isNotNull(Array.from(Object.values(properties))) &&
+            testRegularExpression(passwordRegExp, properties.password) &&
+            testRegularExpression(emailRegExp, properties.newEmail) &&
+            compareValues([properties.newEmail, properties.confirmNewEmail]);
     }
 
     render() {
+        const { properties, errors } = this.state;
         return (
             <UpdateEmail
-                password={this.state.password}
-                newEmail={this.state.newEmail}
-                confirmNewEmail={this.state.confirmNewEmail}
+                password={properties.password}
+                newEmail={properties.newEmail}
+                confirmNewEmail={properties.confirmNewEmail}
 
-                passwordError={this.state.passwordError}
-                newEmailError={this.newEmailError}
-                confirmNewEmailError={this.confirmNewEmailError}
+                passwordError={errors.passwordError}
+                newEmailError={errors.newEmailError}
+                confirmNewEmailError={errors.confirmNewEmailError}
 
                 onEmailUpdate={this.updateEmail}
                 onValueChange={this.changeValue}

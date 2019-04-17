@@ -5,6 +5,7 @@ import { sendPasswordResetEmail } from '../../store/actions/accountActions';
 import { testRegularExpression, isNotNull } from '../../services/Validation';
 import { setEmailError } from '../../services/Error';
 import { emailRegExp } from '../../consts';
+import { error } from 'util';
 
 class ForgotPasswordcontainer extends Component {
 
@@ -12,16 +13,24 @@ class ForgotPasswordcontainer extends Component {
         super(props);
 
         this.state = {
-            email: '',
+            properties: {
+                email: ''
+            },
 
-            emailError: ''
+            errors: {
+                emailError: ''
+            }
         }
     }
 
     sendPasswordResetEmail = () => {
-        if (this.isValid) {
+        const { properties } = this.state;
+        if (this.isValid()) {
             this.props.sendPasswordResetEmail({
-                email: this.state.email
+                properties: {
+                    ...properties,
+                    email: this.state.email
+                }
             });
         }
         else {
@@ -30,27 +39,38 @@ class ForgotPasswordcontainer extends Component {
     }
 
     setErrors = () => {
+        const { properties, errors } = this.state;
         this.setState({
-            emailError: setEmailError(emailRegExp, this.state.email)
+            errors: {
+                ...errors,
+                emailError: setEmailError(emailRegExp, properties.email)
+            }
         });
     }
 
     changeValue = (e) => {
+        const { properties } = this.state;
         this.setState({
-            [e.target.name]: e.target.value
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state))) && testRegularExpression(emailRegExp, this.state.email)
+        const { properties } = this.state;
+        return isNotNull(Array.from(Object.values(properties))) &&
+            testRegularExpression(emailRegExp, properties.email)
     }
 
     render() {
+        const { properties, errors } = this.state;
         return (
             <ForgotPassword
-                email={this.state.email}
+                email={properties.email}
 
-                emailError={this.state.emailError}
+                emailError={errors.emailError}
 
                 sendPasswordResetEmail={this.sendPasswordResetEmail}
                 onValueChange={this.changeValue}

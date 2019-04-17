@@ -8,9 +8,10 @@ import UpdatePasswordContainer from './UpdatePasswordContainer';
 class SettingsContainer extends Component {
 
     render() {
+        const {auth} = this.props;
         return (
             <div> {
-                !this.props.auth.emailVerified ?
+                !auth.emailVerified ?
                     <SendEmailVerificationContainer /> :
                     <div>
                         <UpdateEmailContainer />

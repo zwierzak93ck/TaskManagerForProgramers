@@ -105,6 +105,7 @@ export const updateEmail = (userData) => {
             .then(() => {
                 currentUser.updateEmail(userData.newEmail)
                     .then(() => {
+                        console.log('success')
                         dispatch({ type: 'UPDATE_EMAIL_SUCCESS' })
                     })
                     .catch((error) => {

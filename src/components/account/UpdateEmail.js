@@ -25,6 +25,7 @@ export const UpdateEmail = (props) => {
                 <TextField
                     className="text-field"
                     placeholder="Password"
+                    type="password"
                     value={password}
                     onChange={onValueChange}
                     name="password"
@@ -42,10 +43,10 @@ export const UpdateEmail = (props) => {
                 
                 <TextField
                     className="text-field"
-                    placeholder="Email"
+                    placeholder="Confirm New Email"
                     value={confirmNewEmail}
                     onChange={onValueChange}
-                    name="newEmailConfirm"
+                    name="confirmNewEmail"
                 />
                 <div className="error">{confirmNewEmailError}</div>
             </CardContent>

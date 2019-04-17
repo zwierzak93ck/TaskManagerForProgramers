@@ -12,21 +12,26 @@ class UpdatePasswordContainer extends Component {
         super(props);
 
         this.state = {
-            oldPassword: '',
-            newPassword: '',
-            confirmNewPassword: '',
+            properties: {
+                oldPassword: '',
+                newPassword: '',
+                confirmNewPassword: ''
+            },
 
-            oldPasswordError: '',
-            newPasswordError: '',
-            confirmNewPasswordError: ''
+            errors: {
+                oldPasswordError: '',
+                newPasswordError: '',
+                confirmNewPasswordError: ''
+            }
         }
     }
 
     updatePassword = () => {
-        if (this.isValid) {
+        const { properties } = this.state;
+        if (this.isValid()) {
             this.props.updatePassword({
-                newPassword: this.state.newPassword,
-                oldPassword: this.state.oldPassword
+                newPassword: properties.newPassword,
+                oldPassword: properties.oldPassword
             }
             );
         }
@@ -37,37 +42,46 @@ class UpdatePasswordContainer extends Component {
     }
 
     setErrors = () => {
+        const { properties, errors } = this.state;
+        console.log(setError(!compareValues([properties.newPassword, properties.confirmNewPassword]), 'The above values are not the same'))
         this.setState({
-            oldPasswordError: setError(!this.state.oldPassword, 'Value cannot be empty'),
-            newPasswordError: setPasswordError(passwordRegExp, this.state.newPassword),
-            confirmNewPasswordError: setError(!compareValues([this.state.newPassword, this.state.confirmNewPassword]), 'The above values are not the same')
-        }
-        );
+            errors: {
+                ...errors,
+                oldPasswordError: setError(!properties.oldPassword, 'Value cannot be empty'),
+                newPasswordError: setPasswordError(passwordRegExp, properties.newPassword),
+                confirmNewPasswordError: setError(!compareValues([properties.newPassword, properties.confirmNewPassword]), 'The above values are not the same'),
+            }
+        });
     }
 
     changeValue = (e) => {
+        const { properties } = this.state;
         this.setState({
-            [e.target.name]: e.target.value
-        }
-        )
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
+        })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state))) &&
-            testRegularExpression(passwordRegExp, this.state.newPassword) &&
-            compareValues([this.state.newPassword, this.state.confirmNewPassword]);
+        const { properties } = this.state;
+        return isNotNull(Array.from(Object.values(properties))) &&
+            testRegularExpression(passwordRegExp, properties.newPassword) &&
+            compareValues([properties.newPassword, properties.confirmNewPassword]);
     }
 
     render() {
+        const { properties, errors } = this.state;
         return (
             <UpdatePassword
-                oldPassword={this.state.oldPassword}
-                newPassword={this.state.newPassword}
-                newPasswordConfirm={this.state.newPasswordConfirm}
+                oldPassword={properties.oldPassword}
+                newPassword={properties.newPassword}
+                confirmNewPassword={properties.confirmNewPassword}
 
-                oldPasswordError={this.state.oldPasswordError}
-                newPasswordError={this.state.newPasswordError}
-                confirmNewPasswordError={this.state.confirmNewPasswordError}
+                oldPasswordError={errors.oldPasswordError}
+                newPasswordError={errors.newPasswordError}
+                confirmNewPasswordError={errors.confirmNewPasswordError}
 
                 onPasswordUpdate={this.updatePassword}
                 onValueChange={this.changeValue}

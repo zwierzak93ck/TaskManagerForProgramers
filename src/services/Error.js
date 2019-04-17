@@ -18,7 +18,6 @@ export const setPasswordError = (passwordRegExp, password) => {
 }
 
 export const setDateError = (date) => {
-    console.log(!isDateValid(date))
     return setError(!date, 'Value cannot be empty') || setError(!isDateValid(date), 'Invalid date');
 }
 

@@ -25,6 +25,7 @@ export const UpdatePassword = (props) => {
                 <TextField
                     className="text-field"
                     placeholder="Old Password"
+                    type="password"
                     value={oldPassword}
                     onChange={onValueChange}
                     name="oldPassword"
@@ -34,6 +35,7 @@ export const UpdatePassword = (props) => {
                 <TextField
                     className="text-field"
                     placeholder="New Password"
+                    type="password"
                     value={newPassword}
                     onChange={onValueChange}
                     name="newPassword"
@@ -42,7 +44,8 @@ export const UpdatePassword = (props) => {
                 
                 <TextField
                     className="text-field"
-                    placeholder="Email"
+                    placeholder="Confirm New Password"
+                    type="password"
                     value={confirmNewPassword}
                     onChange={onValueChange}
                     name="confirmNewPassword"

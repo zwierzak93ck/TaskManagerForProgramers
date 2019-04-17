@@ -32,9 +32,7 @@ class SignUpContainer extends Component {
 
     signUp = () => {
         const {properties} = this.state;
-        console.log(this.isValid())
         if (this.isValid()) {
-            console.log('dfds')
             this.props.signUp({
                 email: properties.email,
                 password: properties.password,

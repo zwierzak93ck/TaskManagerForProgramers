@@ -11,15 +11,19 @@ class UpdateDisplayNameContainer extends Component {
         super(props);
 
         this.state = {
-            newDisplayName: '',
-            newDisplayNameError: ''
+            properties: {
+                newDisplayName: ''
+            },
+            errors: {
+                newDisplayNameError: ''
+            }
         }
     }
 
     updateDisplayName = () => {
-        if (this.isValid) {
-
-            this.props.updateDisplayName(this.state.newDisplayName);
+        const { properties } = this.state;
+        if (this.isValid()) {
+            this.props.updateDisplayName(properties.newDisplayName);
         }
         else {
             this.setErrors()
@@ -27,27 +31,37 @@ class UpdateDisplayNameContainer extends Component {
     }
 
     setErrors = () => {
+        const { properties, errors } = this.state;
         this.setState({
-            newDisplayNameError: setError(!this.state.newDisplayName, 'Value cannot be empty')
+            errors: {
+                ...errors,
+                newDisplayNameError: setError(!properties.newDisplayName, 'Value cannot be empty')
+            }
         })
     }
 
     changeValue = (e) => {
+        const { properties } = this.state;
         this.setState({
-            [e.target.name]: e.target.value
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state)));
+        const { properties } = this.state;
+        return isNotNull(Array.from(Object.values(properties)));
     }
 
     render() {
+        const { properties, errors } = this.state
         return (
             <UpdateDisplayName
-                newDisplayName={this.state.newDisplayName}
+                newDisplayName={properties.newDisplayName}
 
-                newDisplayNameError={this.state.newDisplayNameError}
+                newDisplayNameError={errors.newDisplayNameError}
 
                 onDisplayNameUpdate={this.updateDisplayName}
                 onValueChange={this.changeValue}

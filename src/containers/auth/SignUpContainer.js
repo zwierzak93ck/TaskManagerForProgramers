@@ -12,26 +12,33 @@ class SignUpContainer extends Component {
         super(props);
 
         this.state = {
-            email: '',
-            confirmEmail: '',
-            password: '',
-            confirmPassword: '',
-            nickName: '',
+            properties: {
+                email: '',
+                confirmEmail: '',
+                password: '',
+                confirmPassword: '',
+                nickName: ''
+            },
 
-            emailError: '',
-            confirmEmailError: '',
-            passwordError: '',
-            confirmPasswordError: '',
-            nickNameError: ''
+            errors: {
+                emailError: '',
+                confirmEmailError: '',
+                passwordError: '',
+                confirmPasswordError: '',
+                nickNameError: ''
+            }
         }
     }
 
     signUp = () => {
+        const {properties} = this.state;
+        console.log(this.isValid())
         if (this.isValid()) {
+            console.log('dfds')
             this.props.signUp({
-                email: this.state.email,
-                password: this.state.password,
-                nickName: this.state.nickName
+                email: properties.email,
+                password: properties.password,
+                nickName: properties.nickName
             });
         }
         else {
@@ -40,47 +47,59 @@ class SignUpContainer extends Component {
     }
 
     setErrors = () => {
+        const {properties, errors} = this.state;
         this.setState({
-            emailError: setEmailError(emailRegExp, this.state.email),
-            confirmEmailError: setError(!compareValues([this.state.email, this.state.confirmEmail]), 'The above values are not the same'),
-            passwordError: setPasswordError(passwordRegExp, this.state.password),
-            confirmPasswordError: setError(!compareValues([this.state.password, this.state.confirmPassword]), 'The above values are not the same'),
-            nickNameError: setError(!this.state.nickName, 'Value cannot be empty')
+            errors: {
+                ...errors,
+                emailError: setEmailError(emailRegExp, properties.email),
+                confirmEmailError: setError(!compareValues([properties.email, properties.confirmEmail]), 'The above values are not the same'),
+                passwordError: setPasswordError(passwordRegExp, properties.password),
+                confirmPasswordError: setError(!compareValues([properties.password, properties.confirmPassword]), 'The above values are not the same'),
+                nickNameError: setError(!properties.nickName, 'Value cannot be empty')
+            }
         });
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
+        const {properties} = this.state;
         this.setState({
-            [e.target.name]: e.target.value
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state))) &&
-            testRegularExpression(emailRegExp, this.state.email) &&
-            testRegularExpression(passwordRegExp, this.state.password) &&
-            compareValues([this.state.email, this.state.confirmEmail]) &&
-            compareValues([this.state.password, this.state.confirmPassword]);
+        const {properties} = this.state;
+        return isNotNull(Array.from(Object.values(properties))) &&
+            testRegularExpression(emailRegExp, properties.email) &&
+            testRegularExpression(passwordRegExp, properties.password) &&
+            compareValues([properties.email, properties.confirmEmail]) &&
+            compareValues([properties.password, properties.confirmPassword]);
     }
 
     render() {
+
+        const { properties, errors } = this.state;
+        const {authError} = this.props;
         return (
             <SignUp
-                email={this.state.email}
-                confirmEmail={this.state.confirmEmail}
-                password={this.state.password}
-                confirmPassword={this.state.confirmPassword}
-                nickName={this.state.nickName}
+                email={properties.email}
+                confirmEmail={properties.confirmEmail}
+                password={properties.password}
+                confirmPassword={properties.confirmPassword}
+                nickName={properties.nickName}
 
-                emailError={this.state.emailError}
-                confirmEmailError={this.state.confirmEmailError}
-                passwordError={this.state.passwordError}
-                confirmPasswordError={this.state.confirmPasswordError}
-                nickNameError={this.state.nickNameError}
-                authError={this.props.authError}
+                emailError={errors.emailError}
+                confirmEmailError={errors.confirmEmailError}
+                passwordError={errors.passwordError}
+                confirmPasswordError={errors.confirmPasswordError}
+                nickNameError={errors.nickNameError}
+                authError={authError}
 
                 onSignUp={this.signUp}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

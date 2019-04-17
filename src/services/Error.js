@@ -1,4 +1,4 @@
-import { testRegularExpression } from './Validation';
+import { testRegularExpression, isDateValid } from './Validation';
 
 export const setEmailError = (emailRegExp, email) => {
     return setError(!email, 'Value cannot be empty.') ||
@@ -15,6 +15,11 @@ export const setPasswordError = (passwordRegExp, password) => {
             'Wrong password. At least 6 characters, one small letter, ' +
             'one capital letter, one number and one special character are required.'
         );
+}
+
+export const setDateError = (date) => {
+    console.log(!isDateValid(date))
+    return setError(!date, 'Value cannot be empty') || setError(!isDateValid(date), 'Invalid date');
 }
 
 export const setError = (condition, message) => {

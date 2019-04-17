@@ -17,7 +17,7 @@ class UpdateDisplayNameContainer extends Component {
     }
 
     updateDisplayName = () => {
-        if (this.isValid()) {
+        if (this.isValid) {
 
             this.props.updateDisplayName(this.state.newDisplayName);
         }
@@ -32,7 +32,7 @@ class UpdateDisplayNameContainer extends Component {
         })
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -50,7 +50,7 @@ class UpdateDisplayNameContainer extends Component {
                 newDisplayNameError={this.state.newDisplayNameError}
 
                 onDisplayNameUpdate={this.updateDisplayName}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

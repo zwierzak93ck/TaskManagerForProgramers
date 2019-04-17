@@ -5,8 +5,8 @@ import SendEmailVerificationContainer from '../account/SendEmailVerificationCont
 import { CreateProject } from '../../components/project/CreateProject';
 import { sendEmailVerification } from '../../store/actions/accountActions';
 import { createProject } from '../../store/actions/projectActions';
-import { isNotNull } from '../../services/Validation';
-import { setError } from '../../services/Error';
+import { isNotNull, isDateValid } from '../../services/Validation';
+import { setError, setDateError } from '../../services/Error';
 
 
 class CreateProjectContainer extends Component {
@@ -15,47 +15,27 @@ class CreateProjectContainer extends Component {
         super(props);
 
         this.state = {
-            name: '',
-            description: '',
-            date: null,
+            properties: {
+                name: '',
+                description: '',
+                date: null
+            },
 
-            nameError: '',
-            descriptionError: '',
-            dateError: ''
+            errors: {
+                nameError: '',
+                descriptionError: '',
+                dateError: ''
+            }
         }
-    }
-
-    onValueChange = (e) => {
-        if (e.target) {
-            this.setState({
-                [e.target.name]: e.target.value
-            });
-        }
-        else {
-            this.setState({
-                date: e
-            });
-        }
-    }
-
-    setErrors = () => {
-        this.setState({
-            nameError: setError(!this.state.name, 'Value cannot be empty'),
-            descriptionError: setError(!this.state.description, 'Value cannot be empty'),
-            dateError: setError(!this.state.date, 'Value cannot be empty')
-        });
-    }
-
-    isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state)))
     }
 
     createProject = () => {
+        const {properties} = this.state;
         if (this.isValid()) {
             this.props.createProject({
-                name: this.state.name,
-                description: this.state.description,
-                date: this.state.date
+                name: properties.name,
+                description: properties.description,
+                date: properties.date
             });
         }
         else {
@@ -63,21 +43,60 @@ class CreateProjectContainer extends Component {
         }
     }
 
+    changeValue = (e) => {
+        const {properties} = this.state;
+        if (e.target) {
+            this.setState({
+                properties: {
+                    ...properties,
+                    [e.target.name]: e.target.value
+                }
+            });
+        }
+        else {
+            this.setState({
+                properties: {
+                    ...properties,
+                    date: e
+                }
+            });
+        }
+    }
+
+    setErrors = () => {
+        const {properties, errors} = this.state;
+        this.setState({
+            errors: {
+                ...errors,
+            nameError: setError(!properties.name, 'Value cannot be empty'),
+            descriptionError: setError(!properties.description, 'Value cannot be empty'),
+            dateError: setDateError(properties.date)
+            }
+        });
+    }
+
+    isValid = () => {
+        const {properties} = this.state
+        return isNotNull(Array.from(Object.values([properties.name, properties.description]))) && 
+        isDateValid(properties.date);
+    }
+
     render() {
+        const {properties, errors} = this.state;
         return (
             this.props.auth.isEmpty ?
                 <Redirect to="/signIn" /> :
                 this.props.auth.emailVerified ?
                     <CreateProject
-                        title={this.state.projectName}
-                        description={this.state.description}
-                        date={this.state.date}
+                        title={properties.projectName}
+                        description={properties.description}
+                        date={properties.date}
 
-                        nameError={this.state.nameError}
-                        descriptionError={this.state.descriptionError}
-                        dateError={this.state.descriptionError}
+                        nameError={errors.nameError}
+                        descriptionError={errors.descriptionError}
+                        dateError={errors.dateError}
 
-                        onValueChange={this.onValueChange}
+                        onValueChange={this.changeValue}
                         onProjectCreate={this.createProject}
                     /> : <SendEmailVerificationContainer />
         )

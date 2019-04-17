@@ -4,11 +4,13 @@ export const updateDisplayName = (displayName) => {
         const firestore = getFirestore();
 
         const currentUser = firebase.auth().currentUser;
-
+        console.log(currentUser)
+        console.log(displayName)
         currentUser.updateProfile({
             displayName
         })
             .then(() => {
+                console.log('success name')
                 dispatch({ type: 'UPDATE_DISPLAY_NAME_SUCCESS' })
             })
             .catch((error) => {
@@ -30,6 +32,7 @@ export const sendEmailVerification = () => {
         };
         currentUser.sendEmailVerification(actionCodeSettings)
             .then(() => {
+                console.log('success email')
                 dispatch({ type: 'SEND_VARIFICATION_EMAIL_SUCCESS' })
             })
             .catch((error) => {

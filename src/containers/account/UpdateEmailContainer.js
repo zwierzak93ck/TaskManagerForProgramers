@@ -23,7 +23,7 @@ class UpdateEmailContainer extends Component {
     }
 
     updateEmail = () => {
-        if (this.isValid()) {
+        if (this.isValid) {
             this.props.updateEmail({
                 newEmail: this.state.newEmail,
                 password: this.state.password
@@ -45,7 +45,7 @@ class UpdateEmailContainer extends Component {
         });
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -70,7 +70,7 @@ class UpdateEmailContainer extends Component {
                 confirmNewEmailError={this.confirmNewEmailError}
 
                 onEmailUpdate={this.updateEmail}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

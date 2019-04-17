@@ -11,19 +11,25 @@ class SignInContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            properties: {
 
-            emailError: '',
-            passwordError: ''
+                email: '',
+                password: ''
+            },
+
+            errors: {
+                emailError: '',
+                passwordError: ''
+            }
         }
     }
 
     signIn = () => {
+        const {properties} = this.state;
         if (this.isValid()) {
             this.props.signIn({
-                email: this.state.email,
-                password: this.state.password
+                email: properties.email,
+                password: properties.password
             });
         }
         else {
@@ -32,37 +38,48 @@ class SignInContainer extends Component {
     }
 
     setErrors = () => {
+        const {properties, errors} = this.state;
         this.setState({
-            emailError: setEmailError(emailRegExp, this.state.email),
-            passwordError: setPasswordError(passwordRegExp, this.state.password)
+            errors: {
+                ...errors,
+                emailError: setEmailError(emailRegExp, properties.email),
+                passwordError: setPasswordError(passwordRegExp, properties.password)
+            } 
         });
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
+        const {properties} = this.state;
         this.setState({
-            [e.target.name]: e.target.value
+            properties: {
+                ...properties,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
     isValid = () => {
-        return isNotNull(Array.from(Object.values(this.state))) &&
-            testRegularExpression(emailRegExp, this.state.email) &&
-            testRegularExpression(passwordRegExp, this.state.password);
+        const {properties} = this.state;
+        return isNotNull(Array.from(Object.values(properties))) &&
+            testRegularExpression(emailRegExp, properties.email) &&
+            testRegularExpression(passwordRegExp, properties.password);
     }
 
     render() {
+        const {properties, errors} = this.state;
+        const {authError, accountError} = this.props;
         return (
             <SignIn
-                email={this.state.email}
-                password={this.state.password}
+                email={properties.email}
+                password={properties.password}
 
-                emailError={this.state.emailError}
-                passwordError={this.state.passwordError}
-                authError={this.props.authError}
-                accountError={this.props.accountError}
+                emailError={errors.emailError}
+                passwordError={errors.passwordError}
+                authError={authError}
+                accountError={accountError}
 
                 onSignIn={this.signIn}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

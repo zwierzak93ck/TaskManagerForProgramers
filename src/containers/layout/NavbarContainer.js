@@ -5,6 +5,7 @@ import { signOut } from '../../store/actions/authActions';
 
 class NavbarContainer extends Component {
 
+    
     constructor(props) {
         super(props)
 
@@ -23,7 +24,7 @@ class NavbarContainer extends Component {
 
     toggleMenu = (e) => {
         this.setState({
-            anchorEl: e.currentTarget ? null : e.currentTarget
+            anchorEl: this.state.anchorEl ?  null : e.currentTarget
         })
     }
 

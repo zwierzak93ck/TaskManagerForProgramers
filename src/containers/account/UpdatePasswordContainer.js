@@ -23,7 +23,7 @@ class UpdatePasswordContainer extends Component {
     }
 
     updatePassword = () => {
-        if (this.isValid()) {
+        if (this.isValid) {
             this.props.updatePassword({
                 newPassword: this.state.newPassword,
                 oldPassword: this.state.oldPassword
@@ -45,7 +45,7 @@ class UpdatePasswordContainer extends Component {
         );
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         }
@@ -70,7 +70,7 @@ class UpdatePasswordContainer extends Component {
                 confirmNewPasswordError={this.state.confirmNewPasswordError}
 
                 onPasswordUpdate={this.updatePassword}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

@@ -1,6 +1,7 @@
 import { updateDisplayName, sendEmailVerification } from './accountActions';
 
 export const signUp = (newUserData) => {
+    console.log('teast')
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
@@ -9,19 +10,17 @@ export const signUp = (newUserData) => {
             newUserData.email,
             newUserData.password
         )
-            .then((response) => {
-                return firestore.collection('users').doc(response.user.uid).set({
-                    nickName: newUserData.nickName
-                })
-            })
             .then(() => {
                 dispatch(updateDisplayName(newUserData.nickName));
             })
-            .then(() => {
+            .then((result) => {
                 dispatch(sendEmailVerification());
             })
             .then(() => {
                 dispatch({ type: 'SIGN_UP_SUCCESS' });
+            })
+            .then(() => {
+                dispatch(window.location.reload())
             })
             .catch((error) => {
                 dispatch({ type: 'SIGN_UP_ERROR', error });
@@ -39,9 +38,7 @@ export const signIn = (userData) => {
         )
             .then(() => {
                 dispatch({ type: 'SIGN_IN_SUCCESS' })
-            }
-
-            )
+            })
             .catch((error) => {
                 dispatch({ type: 'SIGN_IN_ERROR', error })
             })

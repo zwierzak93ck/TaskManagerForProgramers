@@ -1,4 +1,6 @@
 export const isNotNull = (values) => {
+    values.forEach(element => {
+    });
     return values.every(element => {
         return element.length > 0;
     });
@@ -12,5 +14,9 @@ export const compareValues = (values) => {
 
 export const testRegularExpression = (expression, value) => {
     return expression.test(value);
+}
+
+export const isDateValid = (date) => {
+    return Date.parse(date) ? true : false;
 }
 

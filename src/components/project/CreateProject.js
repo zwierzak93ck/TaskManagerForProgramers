@@ -21,7 +21,7 @@ export const CreateProject = (props) => {
     onValueChange,
   } = props;
   const currentDate = new Date();
-
+  console.log(dateError)
   return (
     <Card className="flex-container">
       <CardContent className="card-content">
@@ -55,8 +55,6 @@ export const CreateProject = (props) => {
             minDate={currentDate}
             ampm="false"
             disableFuture={false}
-            emptyLabel="Date"
-            keyboard
             clearable
           />
         </MuiPickersUtilsProvider>

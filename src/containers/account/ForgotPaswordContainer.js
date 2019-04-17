@@ -19,7 +19,7 @@ class ForgotPasswordcontainer extends Component {
     }
 
     sendPasswordResetEmail = () => {
-        if (this.isValid()) {
+        if (this.isValid) {
             this.props.sendPasswordResetEmail({
                 email: this.state.email
             });
@@ -35,7 +35,7 @@ class ForgotPasswordcontainer extends Component {
         });
     }
 
-    onValueChange = (e) => {
+    changeValue = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -53,7 +53,7 @@ class ForgotPasswordcontainer extends Component {
                 emailError={this.state.emailError}
 
                 sendPasswordResetEmail={this.sendPasswordResetEmail}
-                onValueChange={this.onValueChange}
+                onValueChange={this.changeValue}
             />
         )
     }

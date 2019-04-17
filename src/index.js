@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const store = createStore(rootReducer, compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reactReduxFirebase(firebase, { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true }),
+    reactReduxFirebase(firebase, { useFirestoreForProfile: true, attachAuthIsReady: true }),
     reduxFirestore(firebase)
 ));
 

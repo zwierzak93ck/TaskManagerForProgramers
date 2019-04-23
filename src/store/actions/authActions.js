@@ -1,7 +1,6 @@
 import { updateDisplayName, sendEmailVerification } from './accountActions';
 
 export const signUp = (newUserData) => {
-    console.log('teast')
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();

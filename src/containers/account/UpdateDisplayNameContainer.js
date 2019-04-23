@@ -4,6 +4,7 @@ import { UpdateDisplayName } from '../../components/account/UpdateDisplayName';
 import { updateDisplayName } from '../../store/actions/accountActions';
 import { isNotNull } from '../../services/Validation';
 import { setError } from '../../services/Error';
+import SnackbarMessageContainer from '../layout/NotificationContainer';
 
 class UpdateDisplayNameContainer extends Component {
 

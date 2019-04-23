@@ -10,6 +10,7 @@ import SidebarContainer from '../../containers/layout/SidebarContainer';
 import SignInContainer from '../../containers/auth/SignInContainer';
 import SignUpContainer from '../../containers/auth/SignUpContainer';
 import '../../stylesheets/rootStyles.scss';
+import NotificationContainer from '../../containers/layout/NotificationContainer';
 
 export const MainContent = (props) => {
     const { auth } = props;
@@ -32,7 +33,9 @@ export const MainContent = (props) => {
                     <Route path="/forgotPassword" component={ForgotPaswordContainer} />
                     <Route path="/settings" component={SettingsContainer} />
                 </div>
+                <NotificationContainer />
             </div>
+                        
         </BrowserRouter>
     )
 }

@@ -1,3 +1,5 @@
+import {openNotification} from './notificationActions';
+
 export const createProject = (project) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
 
@@ -10,6 +12,9 @@ export const createProject = (project) => {
         })
             .then(() => {
                 dispatch({ type: 'CREATE_PROJECT_SUCCESS' })
+            })
+            .then(() => {
+                dispatch(openNotification('Project added', 'success', true))
             })
             .catch(() => {
                 dispatch({ type: 'CREATE_PROJECT_ERROR' })

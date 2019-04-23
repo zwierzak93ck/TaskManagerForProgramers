@@ -14,7 +14,7 @@ class SettingsContainer extends Component {
                 !auth.emailVerified ?
                     <SendEmailVerificationContainer /> :
                     <div>
-                        <UpdateEmailContainer />
+                        {/* <UpdateEmailContainer /> */}
                         <UpdatePasswordContainer />
                         <UpdateDisplayNameContainer />
                     </div>
